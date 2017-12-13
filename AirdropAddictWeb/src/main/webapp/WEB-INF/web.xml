@@ -10,10 +10,20 @@
     <servlet-name>greetServlet</servlet-name>
     <servlet-class>com.airdropaddict.webpage.server.GreetingServiceImpl</servlet-class>
   </servlet>
+
+  <servlet>
+    <servlet-name>eventService</servlet-name>
+    <servlet-class>com.airdropaddict.webpage.server.EventServiceImpl</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/airdropaddictweb/greet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>eventService</servlet-name>
+    <url-pattern>/airdropaddictweb/event</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

@@ -1,6 +1,7 @@
 package com.airdropaddict.webpage.client;
 
 import com.airdropaddict.webpage.shared.FieldVerifier;
+import com.airdropaddict.webpage.shared.data.EventData;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,6 +18,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import java.util.List;
+
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
@@ -32,6 +35,7 @@ public class AirdropAddictWeb implements EntryPoint {
 	 * Create a remote service proxy to talk to the server-side Greeting service.
 	 */
 	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+	private final EventServiceAsync eventService = GWT.create(EventService.class);
 
 	/**
 	 * This is the entry point method.
@@ -117,7 +121,7 @@ public class AirdropAddictWeb implements EntryPoint {
 				sendButton.setEnabled(false);
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
-				greetingService.greetServer(textToServer, new AsyncCallback<String>() {
+				eventService.getActiveEvents(1, new AsyncCallback<List<EventData>>() {
 					public void onFailure(Throwable caught) {
 						// Show the RPC error message to the user
 						dialogBox.setText("Remote Procedure Call - Failure");
@@ -127,14 +131,32 @@ public class AirdropAddictWeb implements EntryPoint {
 						closeButton.setFocus(true);
 					}
 
-					public void onSuccess(String result) {
+					public void onSuccess(List<EventData> events) {
 						dialogBox.setText("Remote Procedure Call");
 						serverResponseLabel.removeStyleName("serverResponseLabelError");
-						serverResponseLabel.setHTML(result);
+						serverResponseLabel.setHTML(events.get(0).getName() + "<br>" + events.get(0).getDescription());
 						dialogBox.center();
 						closeButton.setFocus(true);
 					}
 				});
+//				greetingService.greetServer(textToServer, new AsyncCallback<String>() {
+//					public void onFailure(Throwable caught) {
+//						// Show the RPC error message to the user
+//						dialogBox.setText("Remote Procedure Call - Failure");
+//						serverResponseLabel.addStyleName("serverResponseLabelError");
+//						serverResponseLabel.setHTML(SERVER_ERROR);
+//						dialogBox.center();
+//						closeButton.setFocus(true);
+//					}
+//
+//					public void onSuccess(String result) {
+//						dialogBox.setText("Remote Procedure Call");
+//						serverResponseLabel.removeStyleName("serverResponseLabelError");
+//						serverResponseLabel.setHTML(result);
+//						dialogBox.center();
+//						closeButton.setFocus(true);
+//					}
+//				});
 			}
 		}
 
