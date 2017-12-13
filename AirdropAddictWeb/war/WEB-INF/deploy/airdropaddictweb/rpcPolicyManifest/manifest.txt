@@ -1,3 +1,0 @@
-# Module airdropaddictweb
-# RPC service class, partial path of RPC policy file
-com.airdropaddict.webpage.client.GreetingService, ADC06225C8C26446E1D11B4F0D5A918D.gwt.rpc
