@@ -1,2 +1,5 @@
 /target/
+/war/
+/bin/
 /.settings/
+/gwt-unitCache/
