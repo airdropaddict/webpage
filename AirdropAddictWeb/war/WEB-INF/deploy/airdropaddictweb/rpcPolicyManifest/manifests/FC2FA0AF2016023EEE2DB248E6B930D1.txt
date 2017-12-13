@@ -1,0 +1,2 @@
+serviceClass: com.airdropaddict.webpage.client.GreetingService
+path: ADC06225C8C26446E1D11B4F0D5A918D.gwt.rpc
