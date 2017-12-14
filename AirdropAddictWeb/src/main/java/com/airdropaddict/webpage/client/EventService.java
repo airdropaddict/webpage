@@ -12,5 +12,5 @@ public interface EventService extends RemoteService
     List<EventData> getActiveEvents(long eventType) throws IllegalArgumentException;
     void addEvent(EventData event) throws IllegalArgumentException;
     void updateEvent(EventData event) throws IllegalArgumentException;
-    void deleveEvent(EventData event) throws IllegalArgumentException;
+    void deleteEvent(EventData event) throws IllegalArgumentException;
 }

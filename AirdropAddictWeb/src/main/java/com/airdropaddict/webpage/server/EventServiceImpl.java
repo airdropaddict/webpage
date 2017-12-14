@@ -32,7 +32,7 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
     }
 
     @Override
-    public void deleveEvent(EventData event) throws IllegalArgumentException {
+    public void deleteEvent(EventData event) throws IllegalArgumentException {
 
     }
 }

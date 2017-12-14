@@ -9,5 +9,5 @@ public interface EventServiceAsync {
     void getActiveEvents(long eventType, AsyncCallback<List<EventData>> callback) throws IllegalArgumentException;
     void addEvent(EventData event, AsyncCallback<Void> callback) throws IllegalArgumentException;
     void updateEvent(EventData event, AsyncCallback<Void> callback) throws IllegalArgumentException;
-    void deleveEvent(EventData event, AsyncCallback<Void> callback) throws IllegalArgumentException;
+    void deleteEvent(EventData event, AsyncCallback<Void> callback) throws IllegalArgumentException;
 }
