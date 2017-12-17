@@ -12,7 +12,8 @@ public class AirdropPanel extends HTML {
 
 	public AirdropPanel(Widget parent) {
 		super();
-		setStyleName("col-lg-4");
+		setStyleName("col-lg-3");
+		addStyleName("col-md-6");
 
 		panel = new HTML();
 		panel.setStyleName("panel");
