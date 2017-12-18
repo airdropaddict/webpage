@@ -1,5 +1,7 @@
 package com.airdropaddict.webpage.client;
 
+import com.airdropaddict.webpage.client.ui.AirdropInfoPanel;
+import com.airdropaddict.webpage.client.ui.AirdropsRowPanel;
 import com.airdropaddict.webpage.shared.FieldVerifier;
 import com.airdropaddict.webpage.shared.data.EventData;
 import com.google.gwt.core.client.EntryPoint;
@@ -19,6 +21,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -41,6 +44,13 @@ public class AirdropAddictWeb implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		GWT.debugger();
+		if (Integer.valueOf(0).intValue() == 0) {
+			RootPanel pageWrapper = RootPanel.get("page-wrapper");
+			IntStream.range(0, 4).mapToObj(i -> new AirdropsRowPanel(pageWrapper))
+					.forEachOrdered(r -> IntStream.range(0, 4).forEachOrdered(i -> new AirdropInfoPanel(r)));
+		}
+
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");
@@ -70,7 +80,7 @@ public class AirdropAddictWeb implements EntryPoint {
 		final HTML serverResponseLabel = new HTML();
 		VerticalPanel dialogVPanel = new VerticalPanel();
 		dialogVPanel.addStyleName("dialogVPanel");
-		dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
+		dialogVPanel.add(new HTML("<b>Sending name to the server ddd:</b>"));
 		dialogVPanel.add(textToServerLabel);
 		dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
 		dialogVPanel.add(serverResponseLabel);
@@ -139,24 +149,24 @@ public class AirdropAddictWeb implements EntryPoint {
 						closeButton.setFocus(true);
 					}
 				});
-//				greetingService.greetServer(textToServer, new AsyncCallback<String>() {
-//					public void onFailure(Throwable caught) {
-//						// Show the RPC error message to the user
-//						dialogBox.setText("Remote Procedure Call - Failure");
-//						serverResponseLabel.addStyleName("serverResponseLabelError");
-//						serverResponseLabel.setHTML(SERVER_ERROR);
-//						dialogBox.center();
-//						closeButton.setFocus(true);
-//					}
-//
-//					public void onSuccess(String result) {
-//						dialogBox.setText("Remote Procedure Call");
-//						serverResponseLabel.removeStyleName("serverResponseLabelError");
-//						serverResponseLabel.setHTML(result);
-//						dialogBox.center();
-//						closeButton.setFocus(true);
-//					}
-//				});
+				// greetingService.greetServer(textToServer, new AsyncCallback<String>() {
+				// public void onFailure(Throwable caught) {
+				// // Show the RPC error message to the user
+				// dialogBox.setText("Remote Procedure Call - Failure");
+				// serverResponseLabel.addStyleName("serverResponseLabelError");
+				// serverResponseLabel.setHTML(SERVER_ERROR);
+				// dialogBox.center();
+				// closeButton.setFocus(true);
+				// }
+				//
+				// public void onSuccess(String result) {
+				// dialogBox.setText("Remote Procedure Call");
+				// serverResponseLabel.removeStyleName("serverResponseLabelError");
+				// serverResponseLabel.setHTML(result);
+				// dialogBox.center();
+				// closeButton.setFocus(true);
+				// }
+				// });
 			}
 		}
 
@@ -164,5 +174,13 @@ public class AirdropAddictWeb implements EntryPoint {
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);
+	}
+
+	private void createRow(RootPanel pageWrapper) {
+
+	}
+
+	private void createInfo(RootPanel pageWrapper) {
+
 	}
 }
