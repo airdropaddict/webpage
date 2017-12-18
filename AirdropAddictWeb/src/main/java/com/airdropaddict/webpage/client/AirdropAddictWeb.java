@@ -1,5 +1,10 @@
 package com.airdropaddict.webpage.client;
 
+import static java.util.stream.IntStream.range;
+
+import java.util.List;
+import java.util.stream.IntStream;
+
 import com.airdropaddict.webpage.client.ui.AirdropInfoPanel;
 import com.airdropaddict.webpage.client.ui.AirdropsRowPanel;
 import com.airdropaddict.webpage.shared.FieldVerifier;
@@ -19,9 +24,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-
-import java.util.List;
-import java.util.stream.IntStream;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -45,11 +47,10 @@ public class AirdropAddictWeb implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		GWT.debugger();
-		if (Integer.valueOf(0).intValue() == 0) {
-			RootPanel pageWrapper = RootPanel.get("page-wrapper");
-			IntStream.range(0, 4).mapToObj(i -> new AirdropsRowPanel(pageWrapper))
-					.forEachOrdered(r -> IntStream.range(0, 4).forEachOrdered(i -> new AirdropInfoPanel(r)));
-		}
+
+		RootPanel pageWrapper = RootPanel.get("page-wrapper");
+		range(0, 4).mapToObj(i -> new AirdropsRowPanel(pageWrapper))
+				.forEachOrdered(r -> range(0, 4).forEachOrdered(i -> new AirdropInfoPanel(r)));
 
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
