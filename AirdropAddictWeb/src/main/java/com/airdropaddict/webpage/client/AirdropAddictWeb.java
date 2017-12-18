@@ -3,7 +3,6 @@ package com.airdropaddict.webpage.client;
 import static java.util.stream.IntStream.range;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 import com.airdropaddict.webpage.client.ui.AirdropInfoPanel;
 import com.airdropaddict.webpage.client.ui.AirdropsRowPanel;
@@ -25,9 +24,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-/**
- * Entry point classes define <code>onModuleLoad()</code>.
- */
 public class AirdropAddictWeb implements EntryPoint {
 	/**
 	 * The message displayed to the user when the server cannot be reached or
@@ -36,15 +32,8 @@ public class AirdropAddictWeb implements EntryPoint {
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network " + "connection and try again.";
 
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
-	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 	private final EventServiceAsync eventService = GWT.create(EventService.class);
 
-	/**
-	 * This is the entry point method.
-	 */
 	public void onModuleLoad() {
 		GWT.debugger();
 
