@@ -121,7 +121,8 @@ public class AirdropAddictWeb implements EntryPoint {
 				sendButton.setEnabled(false);
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
-				eventService.getActiveEvents(1, new AsyncCallback<List<EventData>>() {
+//				eventService.getActiveEvents(1, new AsyncCallback<List<EventData>>() {
+				eventService.initializeCatalogs(new AsyncCallback<Boolean>() {
 					public void onFailure(Throwable caught) {
 						// Show the RPC error message to the user
 						dialogBox.setText("Remote Procedure Call - Failure");
@@ -131,32 +132,14 @@ public class AirdropAddictWeb implements EntryPoint {
 						closeButton.setFocus(true);
 					}
 
-					public void onSuccess(List<EventData> events) {
+					public void onSuccess(Boolean status) {
 						dialogBox.setText("Remote Procedure Call");
 						serverResponseLabel.removeStyleName("serverResponseLabelError");
-						serverResponseLabel.setHTML(events.get(0).getName() + "<br>" + events.get(0).getDescription());
+						serverResponseLabel.setHTML("Success status: " + status.toString());
 						dialogBox.center();
 						closeButton.setFocus(true);
 					}
 				});
-//				greetingService.greetServer(textToServer, new AsyncCallback<String>() {
-//					public void onFailure(Throwable caught) {
-//						// Show the RPC error message to the user
-//						dialogBox.setText("Remote Procedure Call - Failure");
-//						serverResponseLabel.addStyleName("serverResponseLabelError");
-//						serverResponseLabel.setHTML(SERVER_ERROR);
-//						dialogBox.center();
-//						closeButton.setFocus(true);
-//					}
-//
-//					public void onSuccess(String result) {
-//						dialogBox.setText("Remote Procedure Call");
-//						serverResponseLabel.removeStyleName("serverResponseLabelError");
-//						serverResponseLabel.setHTML(result);
-//						dialogBox.center();
-//						closeButton.setFocus(true);
-//					}
-//				});
 			}
 		}
 

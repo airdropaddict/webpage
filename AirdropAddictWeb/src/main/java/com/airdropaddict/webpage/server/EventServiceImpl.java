@@ -1,29 +1,66 @@
 package com.airdropaddict.webpage.server;
 
 import com.airdropaddict.webpage.client.EventService;
+import com.airdropaddict.webpage.server.entity.CatalogEntity;
+import com.airdropaddict.webpage.shared.data.CatalogType;
+import com.airdropaddict.webpage.server.entity.EventEntity;
+import com.airdropaddict.webpage.shared.data.CatalogData;
 import com.airdropaddict.webpage.shared.data.EventData;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.Ref;
 
-import java.util.LinkedList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EventServiceImpl extends RemoteServiceServlet implements EventService {
 
-//    private static final PersistenceManagerFactory PMF = JDOHelper.getPersistenceManagerFactory("transactions-optional");
-
     @Override
-    public List<EventData> getActiveEvents(long eventType) throws IllegalArgumentException {
-        List<EventData> events = new LinkedList<>();
-        EventData event = new EventData();
-        event.setName("Test");
-        event.setDescription("Description");
-        events.add(event);
-        return events;
+    public boolean initializeCatalogs() throws IllegalArgumentException {
+        List<CatalogEntity> catalog = ObjectifyService.ofy()
+                .load()
+                .type(CatalogEntity.class)
+                .list();
+        boolean appended = addToCatalogIfNotExists(catalog, CatalogType.CATALOG_TYPE, "EVT", "Event Type");
+        appended |= addToCatalogIfNotExists(catalog, CatalogType.EVENT_TYPE, "AIR", "Airdrop");
+        return appended;
     }
 
     @Override
-    public void addEvent(EventData event) throws IllegalArgumentException {
+    public List<CatalogData> loadCatalogByType(CatalogType catalogType) throws IllegalArgumentException {
+        List<CatalogEntity> catalog = BaseDao.getInstance().loadCompleteCatalogByType(catalogType);
+        return catalog.stream().map(CatalogEntity::toData).collect(Collectors.toList());
+    }
 
+    @Override
+    public CatalogData getCatalogByTypeAndCode(CatalogType catalogType, String code) throws IllegalArgumentException {
+        return BaseDao.getInstance().getCatalogByTypeAndCode(catalogType, code).toData();
+    }
+
+    @Override
+    public EventData getEventById(long id) throws IllegalArgumentException {
+        return BaseDao.getInstance().load(EventEntity.class, id).toData();
+    }
+
+    @Override
+    public long saveEvent(EventData event) throws IllegalArgumentException {
+        if (event.getEventType() == null) {
+            throw new IllegalArgumentException("Empty event type was given.");
+        }
+        if (Tools.isEmpty(event.getName())) {
+            throw new IllegalArgumentException("Empty event name was given.");
+        }
+
+        CatalogEntity eventType = BaseDao.getInstance().getCatalogByTypeAndCode(CatalogType.EVENT_TYPE, event.getEventType().getCode());
+        EventEntity eventEntity = new EventEntity();
+        eventEntity.setEventType(Ref.create(eventType));
+        eventEntity.setName(event.getName());
+        eventEntity.setDescription(event.getDescription());
+        eventEntity.setStartTimestamp(event.getStartTimestamp());
+        eventEntity.setEndTimestamp(event.getEndTimestamp());
+        BaseDao.getInstance().save(eventEntity);
+        return eventEntity.getId();
     }
 
     @Override
@@ -32,7 +69,47 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
     }
 
     @Override
-    public void deleveEvent(EventData event) throws IllegalArgumentException {
+    public void deleteEvent(EventData event) throws IllegalArgumentException {
 
+    }
+
+    @Override
+    public List<EventData> getActiveEvents(String eventTypeCode) throws IllegalArgumentException {
+        try {
+            Date now = new Date();
+            List<EventEntity> events = ObjectifyService.ofy()
+                    .load()
+                    .type(EventEntity.class)
+                    // ToDo - does not filter by event type!
+//                    .filter("eventType.code", eventTypeCode)
+                    .filter("endTimestamp >", now)
+                    .list();
+            return events.stream().filter(e -> e.getStartTimestamp().before(now)).map(EventEntity::toData).collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    private boolean addToCatalogIfNotExists(List<CatalogEntity> catalog, CatalogType catalogType, String code, String name) {
+        if (catalogType == null || code == null) {
+            return false;
+        }
+        CatalogEntity entry = findCatalogEntry(catalog, catalogType, code);
+        if (entry == null)
+        {
+            entry = new CatalogEntity();
+            entry.setCatalogType(catalogType);
+            entry.setCode(code);
+            entry.setName(name);
+            BaseDao.getInstance().save(entry);
+            return true;
+        }
+        return false;
+    }
+
+    private CatalogEntity findCatalogEntry(List<CatalogEntity> catalog, CatalogType catalogType, String code)
+    {
+        return catalog.stream().filter(c -> catalogType.equals(c.getCatalogType()) && code.equals(c.getCode())).findFirst().orElse(null);
     }
 }

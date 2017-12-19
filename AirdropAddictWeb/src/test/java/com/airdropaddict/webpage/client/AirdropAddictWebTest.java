@@ -1,18 +1,34 @@
 package com.airdropaddict.webpage.client;
 
+import com.airdropaddict.webpage.server.entity.EventEntity;
 import com.airdropaddict.webpage.shared.FieldVerifier;
+import com.airdropaddict.webpage.shared.data.CatalogData;
+import com.airdropaddict.webpage.shared.data.CatalogType;
 import com.airdropaddict.webpage.shared.data.EventData;
+import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
+import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
+import java.util.Date;
 import java.util.List;
 
 /**
  * GWT JUnit tests must extend GWTTestCase.
  */
 public class AirdropAddictWebTest extends GWTTestCase {
+
+	private final LocalServiceTestHelper testHelper = new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
+
+	public void gwtSetUp() {
+		testHelper.setUp();
+	}
+
+	public void gwtTearDown() {
+		testHelper.tearDown();
+	}
 
 	/**
 	 * Must refer to a valid module that sources this class.
@@ -58,28 +74,6 @@ public class AirdropAddictWebTest extends GWTTestCase {
 			public void onSuccess(String result) {
 				// Verify that the response is correct.
 				assertTrue(result.startsWith("Hello, GWT User!"));
-
-				// Now that we have received a response, we need to tell the test runner
-				// that the test is complete. You must call finishTest() after an
-				// asynchronous test finishes successfully, or the test will time out.
-				finishTest();
-			}
-		});
-	}
-
-	public void testGetActiveEvents() {
-		EventServiceAsync service = GWT.create(EventService.class);
-		ServiceDefTarget target = (ServiceDefTarget) service;
-		target.setServiceEntryPoint(GWT.getModuleBaseURL() + "airdropaddictweb/event");
-		service.getActiveEvents(1, new AsyncCallback<List<EventData>>() {
-			public void onFailure(Throwable t) {
-				// The request resulted in an unexpected error.
-				fail("Request failure: " + t.getMessage());
-			}
-
-			public void onSuccess(List<EventData> events) {
-				// Verify that the response is correct.
-				assertNotNull("Events are null", events);
 
 				// Now that we have received a response, we need to tell the test runner
 				// that the test is complete. You must call finishTest() after an
