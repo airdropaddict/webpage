@@ -18,15 +18,34 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.gwt:gwt-servlet:2.8.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.gwt:gwt-user:2.8.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.jsinterop:jsinterop-annotations:1.0.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.jsinterop:jsinterop-annotations:sources:1.0.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.appengine.orm:datanucleus-appengine:2.1.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.appengine:appengine-api-1.0-sdk:1.7.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.datanucleus:datanucleus-core:3.1.3"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.datanucleus:datanucleus-enhancer:3.1.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.jdo:jdo-api:3.0.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.transaction:jta:1.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.datanucleus:datanucleus-api-jdo:3.1.3"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/com.google.cloud.tools.eclipse.appengine.standard.runtimeClasspathProvider/App Engine Standard Runtime">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.appengine:appengine-api-1.0-sdk:1.9.59"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.gwt:gwt-servlet:2.8.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.gwt:gwt-user:2.8.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.jsinterop:jsinterop-annotations:1.0.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.jsinterop:jsinterop-annotations:sources:1.0.2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.validation:validation-api:1.0.0.GA"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.validation:validation-api:sources:1.0.0.GA"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.servlet:javax.servlet-api:3.1.0"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.w3c.css:sac:1.3"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.gwt:gwt-dev:2.8.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.gwt:gwt-dev:2.8.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.code.findbugs:jsr305:1.3.9"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.code.gson:gson:2.6.2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.ow2.asm:asm:5.0.3"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.ow2.asm:asm-util:5.0.3"/>
@@ -73,24 +92,19 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.eclipse.jetty.toolchain:jetty-schemas:3.1.M0"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.mortbay.jasper:apache-jsp:8.0.9.M3"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.mortbay.jasper:apache-el:8.0.9.M3"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.github.gwtmaterialdesign:gwt-material:2.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.github.gwtmaterialdesign:gwt-material-jquery:2.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.github.gwtmaterialdesign:gwt-material-addins:2.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.github.gwtmaterialdesign:gwt-material-themes:2.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.guava:guava:23.5-jre"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.checkerframework:checker-qual:2.0.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.errorprone:error_prone_annotations:2.0.18"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.j2objc:j2objc-annotations:1.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.codehaus.mojo:animal-sniffer-annotations:1.14"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.googlecode.objectify:objectify:5.1.21"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: junit:junit:4.11"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.hamcrest:hamcrest-core:1.3"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.appengine.orm:datanucleus-appengine:2.1.2"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.appengine:appengine-api-1.0-sdk:1.7.5"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.datanucleus:datanucleus-core:3.1.3"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.datanucleus:datanucleus-enhancer:3.1.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.jdo:jdo-api:3.0.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.transaction:jta:1.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.datanucleus:datanucleus-api-jdo:3.1.3"/>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/com.google.cloud.tools.eclipse.appengine.standard.runtimeClasspathProvider/App Engine Standard Runtime">
-		<attributes>
-			<attribute name="owner.project.facets" value="jst.web"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.appengine:appengine-api-stubs:1.9.59"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.appengine:appengine-testing:1.9.59"/>
 	<classpathentry kind="output" path="target/AirdropAddictWeb-1.0-SNAPSHOT/WEB-INF/classes"/>
 </classpath>

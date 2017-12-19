@@ -1,11 +1,5 @@
 package com.airdropaddict.webpage.client;
 
-import static java.util.stream.IntStream.range;
-
-import java.util.List;
-
-import com.airdropaddict.webpage.client.ui.AirdropInfoPanel;
-import com.airdropaddict.webpage.client.ui.AirdropsRowPanel;
 import com.airdropaddict.webpage.shared.FieldVerifier;
 import com.airdropaddict.webpage.shared.data.EventData;
 import com.google.gwt.core.client.EntryPoint;
@@ -24,6 +18,11 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import java.util.List;
+
+/**
+ * Entry point classes define <code>onModuleLoad()</code>.
+ */
 public class AirdropAddictWeb implements EntryPoint {
 	/**
 	 * The message displayed to the user when the server cannot be reached or
@@ -32,15 +31,16 @@ public class AirdropAddictWeb implements EntryPoint {
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network " + "connection and try again.";
 
+	/**
+	 * Create a remote service proxy to talk to the server-side Greeting service.
+	 */
+	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 	private final EventServiceAsync eventService = GWT.create(EventService.class);
 
+	/**
+	 * This is the entry point method.
+	 */
 	public void onModuleLoad() {
-		GWT.debugger();
-
-		RootPanel pageWrapper = RootPanel.get("page-wrapper");
-		range(0, 4).mapToObj(i -> new AirdropsRowPanel(pageWrapper))
-				.forEachOrdered(r -> range(0, 4).forEachOrdered(i -> new AirdropInfoPanel(r)));
-
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");
@@ -70,7 +70,7 @@ public class AirdropAddictWeb implements EntryPoint {
 		final HTML serverResponseLabel = new HTML();
 		VerticalPanel dialogVPanel = new VerticalPanel();
 		dialogVPanel.addStyleName("dialogVPanel");
-		dialogVPanel.add(new HTML("<b>Sending name to the server ddd:</b>"));
+		dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
 		dialogVPanel.add(textToServerLabel);
 		dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
 		dialogVPanel.add(serverResponseLabel);
@@ -121,7 +121,8 @@ public class AirdropAddictWeb implements EntryPoint {
 				sendButton.setEnabled(false);
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
-				eventService.getActiveEvents(1, new AsyncCallback<List<EventData>>() {
+//				eventService.getActiveEvents(1, new AsyncCallback<List<EventData>>() {
+				eventService.initializeCatalogs(new AsyncCallback<Boolean>() {
 					public void onFailure(Throwable caught) {
 						// Show the RPC error message to the user
 						dialogBox.setText("Remote Procedure Call - Failure");
@@ -131,32 +132,14 @@ public class AirdropAddictWeb implements EntryPoint {
 						closeButton.setFocus(true);
 					}
 
-					public void onSuccess(List<EventData> events) {
+					public void onSuccess(Boolean status) {
 						dialogBox.setText("Remote Procedure Call");
 						serverResponseLabel.removeStyleName("serverResponseLabelError");
-						serverResponseLabel.setHTML(events.get(0).getName() + "<br>" + events.get(0).getDescription());
+						serverResponseLabel.setHTML("Success status: " + status.toString());
 						dialogBox.center();
 						closeButton.setFocus(true);
 					}
 				});
-				// greetingService.greetServer(textToServer, new AsyncCallback<String>() {
-				// public void onFailure(Throwable caught) {
-				// // Show the RPC error message to the user
-				// dialogBox.setText("Remote Procedure Call - Failure");
-				// serverResponseLabel.addStyleName("serverResponseLabelError");
-				// serverResponseLabel.setHTML(SERVER_ERROR);
-				// dialogBox.center();
-				// closeButton.setFocus(true);
-				// }
-				//
-				// public void onSuccess(String result) {
-				// dialogBox.setText("Remote Procedure Call");
-				// serverResponseLabel.removeStyleName("serverResponseLabelError");
-				// serverResponseLabel.setHTML(result);
-				// dialogBox.center();
-				// closeButton.setFocus(true);
-				// }
-				// });
 			}
 		}
 
@@ -164,13 +147,5 @@ public class AirdropAddictWeb implements EntryPoint {
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);
-	}
-
-	private void createRow(RootPanel pageWrapper) {
-
-	}
-
-	private void createInfo(RootPanel pageWrapper) {
-
 	}
 }
