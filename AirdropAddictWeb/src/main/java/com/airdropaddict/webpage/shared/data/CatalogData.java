@@ -6,6 +6,7 @@ public class CatalogData implements Serializable {
     private long id;
     private String code;
     private String name;
+    private CatalogType catalogType;
 
     public long getId() {
         return id;
@@ -29,5 +30,13 @@ public class CatalogData implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public CatalogType getCatalogType() {
+        return catalogType;
+    }
+
+    public void setCatalogType(CatalogType catalogType) {
+        this.catalogType = catalogType;
     }
 }

@@ -11,6 +11,14 @@ public class EventData implements Serializable {
     private Date startTimestamp;
     private Date endTimestamp;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }

@@ -6,6 +6,17 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
+
+  <filter>
+    <filter-name>ObjectifyFilter</filter-name>
+    <filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>ObjectifyFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <servlet>
     <servlet-name>greetServlet</servlet-name>
     <servlet-class>com.airdropaddict.webpage.server.GreetingServiceImpl</servlet-class>
@@ -25,6 +36,10 @@
     <servlet-name>eventService</servlet-name>
     <url-pattern>/airdropaddictweb/event</url-pattern>
   </servlet-mapping>
+
+  <listener>
+    <listener-class>com.airdropaddict.webpage.server.listener.OfyListener</listener-class>
+  </listener>
   
   <!-- Default page to serve -->
   <welcome-file-list>
