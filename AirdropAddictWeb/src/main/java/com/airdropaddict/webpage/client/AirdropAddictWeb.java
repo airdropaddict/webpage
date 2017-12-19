@@ -1,7 +1,10 @@
 package com.airdropaddict.webpage.client;
 
+import static java.util.stream.IntStream.range;
+
+import com.airdropaddict.webpage.client.ui.AirdropInfoPanel;
+import com.airdropaddict.webpage.client.ui.AirdropsRowPanel;
 import com.airdropaddict.webpage.shared.FieldVerifier;
-import com.airdropaddict.webpage.shared.data.EventData;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -18,29 +21,17 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import java.util.List;
-
-/**
- * Entry point classes define <code>onModuleLoad()</code>.
- */
 public class AirdropAddictWeb implements EntryPoint {
-	/**
-	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
-	 */
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network " + "connection and try again.";
 
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
-	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 	private final EventServiceAsync eventService = GWT.create(EventService.class);
 
-	/**
-	 * This is the entry point method.
-	 */
 	public void onModuleLoad() {
+		RootPanel pageWrapper = RootPanel.get("page-wrapper");
+		range(0, 4).mapToObj(i -> new AirdropsRowPanel(pageWrapper))
+				.forEachOrdered(r -> range(0, 4).forEachOrdered(i -> new AirdropInfoPanel(r)));
+
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");
@@ -121,7 +112,7 @@ public class AirdropAddictWeb implements EntryPoint {
 				sendButton.setEnabled(false);
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
-//				eventService.getActiveEvents(1, new AsyncCallback<List<EventData>>() {
+				// eventService.getActiveEvents(1, new AsyncCallback<List<EventData>>() {
 				eventService.initializeCatalogs(new AsyncCallback<Boolean>() {
 					public void onFailure(Throwable caught) {
 						// Show the RPC error message to the user
