@@ -2,10 +2,13 @@ package com.airdropaddict.webpage.server;
 
 import com.airdropaddict.webpage.server.entity.BasicEntity;
 import com.airdropaddict.webpage.server.entity.CatalogEntity;
+import com.airdropaddict.webpage.server.entity.EventEntity;
 import com.airdropaddict.webpage.shared.data.CatalogType;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.Ref;
 
+import java.util.Date;
 import java.util.List;
 
 public class BaseDao {
@@ -66,5 +69,14 @@ public class BaseDao {
     public void save(BasicEntity entity)
     {
         ObjectifyService.ofy().save().entity(entity).now();
+    }
+
+    public List<EventEntity> loadEventsByEventType(CatalogEntity eventType, Date serverTimestamp) {
+        return ObjectifyService.ofy()
+                .load()
+                .type(EventEntity.class)
+                .filter("eventType", Ref.create(eventType))
+                .filter("endTimestamp >", serverTimestamp)
+                .list();
     }
 }

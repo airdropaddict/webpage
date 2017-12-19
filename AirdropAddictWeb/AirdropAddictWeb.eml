@@ -68,8 +68,6 @@
 	<lib name="Maven: org.hamcrest:hamcrest-core:1.3" scope="TEST"/>
 	<lib name="Maven: com.google.appengine:appengine-api-stubs:1.9.59" scope="TEST"/>
 	<lib name="Maven: com.google.appengine:appengine-testing:1.9.59" scope="TEST"/>
-	<lib name="Maven: com.google.appengine:appengine-api-labs:1.9.59" scope="TEST"/>
-	<lib name="Maven: com.google.appengine:appengine-tools-sdk:1.9.59" scope="TEST"/>
 	<levels>
 		<level name="Maven: com.google.appengine.orm:datanucleus-appengine:2.1.2" value="project"/>
 		<level name="Maven: com.google.appengine:appengine-api-1.0-sdk:1.7.5" value="project"/>
@@ -149,7 +147,5 @@
 		<level name="Maven: org.hamcrest:hamcrest-core:1.3" value="project"/>
 		<level name="Maven: com.google.appengine:appengine-api-stubs:1.9.59" value="project"/>
 		<level name="Maven: com.google.appengine:appengine-testing:1.9.59" value="project"/>
-		<level name="Maven: com.google.appengine:appengine-api-labs:1.9.59" value="project"/>
-		<level name="Maven: com.google.appengine:appengine-tools-sdk:1.9.59" value="project"/>
 	</levels>
 </component>

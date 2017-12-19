@@ -11,6 +11,7 @@ import java.util.Date;
 @Entity
 public class EventEntity extends BasicEntity {
     private String name;
+    @Index
     private Ref<CatalogEntity> eventType;
     private String description;
     @Index

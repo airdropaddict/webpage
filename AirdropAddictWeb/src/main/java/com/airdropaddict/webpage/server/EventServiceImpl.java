@@ -76,15 +76,12 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
     @Override
     public List<EventData> getActiveEvents(String eventTypeCode) throws IllegalArgumentException {
         try {
-            Date now = new Date();
-            List<EventEntity> events = ObjectifyService.ofy()
-                    .load()
-                    .type(EventEntity.class)
-                    // ToDo - does not filter by event type!
-//                    .filter("eventType.code", eventTypeCode)
-                    .filter("endTimestamp >", now)
-                    .list();
-            return events.stream().filter(e -> e.getStartTimestamp().before(now)).map(EventEntity::toData).collect(Collectors.toList());
+            CatalogEntity eventType = BaseDao.getInstance().getCatalogByTypeAndCode(CatalogType.EVENT_TYPE, eventTypeCode);
+            Date serverTimestamp = new Date();
+            // Get events filtered by endTimestamp
+            List<EventEntity> events = BaseDao.getInstance().loadEventsByEventType(eventType, serverTimestamp);
+            // Filter in memory by startTimestamp
+            return events.stream().filter(e -> e.getStartTimestamp().before(serverTimestamp)).map(EventEntity::toData).collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

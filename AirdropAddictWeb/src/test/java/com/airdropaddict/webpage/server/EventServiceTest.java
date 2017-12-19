@@ -28,7 +28,6 @@ public class EventServiceTest {
     @Before
     public void setUp() {
         helper.setUp();
-//        ObjectifyRegistrar.registerDataModel();
         closeable = ObjectifyService.begin();
         ObjectifyService.register(CatalogEntity.class);
         ObjectifyService.register(EventEntity.class);
