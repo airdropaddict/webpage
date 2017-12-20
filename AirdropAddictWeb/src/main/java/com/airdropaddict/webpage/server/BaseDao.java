@@ -3,8 +3,10 @@ package com.airdropaddict.webpage.server;
 import com.airdropaddict.webpage.server.entity.BasicEntity;
 import com.airdropaddict.webpage.server.entity.CatalogEntity;
 import com.airdropaddict.webpage.server.entity.EventEntity;
+import com.airdropaddict.webpage.server.entity.UserEntity;
 import com.airdropaddict.webpage.shared.data.CatalogType;
 import com.googlecode.objectify.Key;
+import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Ref;
 
@@ -23,46 +25,23 @@ public class BaseDao {
         return airdropDao;
     }
 
-    public CatalogEntity getBasicCatalog(CatalogType catalogType)
-    {
-        return ObjectifyService.ofy()
-                .load()
-                .type(CatalogEntity.class)
-                .filter("catalogType", catalogType)
-                .first()
-                .now();
+    public CatalogEntity getBasicCatalog(CatalogType catalogType) {
+        return ofy().load().type(CatalogEntity.class).filter("catalogType", catalogType).first().now();
     }
 
-    public CatalogEntity getCatalogByTypeAndCode(CatalogType catalogType, String code)
-    {
-        return ObjectifyService.ofy()
-                .load()
-                .type(CatalogEntity.class)
-                .filter("catalogType", catalogType)
-                .filter("code", code)
-                .first()
-                .now();
+    public CatalogEntity getCatalogByTypeAndCode(CatalogType catalogType, String code) {
+        return ofy().load().type(CatalogEntity.class).filter("catalogType", catalogType).filter("code", code).first().now();
     }
 
-    public List<CatalogEntity> loadCompleteCatalog()
-    {
-        return ObjectifyService.ofy()
-                .load()
-                .type(CatalogEntity.class)
-                .list();
+    public List<CatalogEntity> loadCompleteCatalog() {
+        return ObjectifyService.ofy().load().type(CatalogEntity.class).list();
     }
 
-    public List<CatalogEntity> loadCompleteCatalogByType(CatalogType catalogType)
-    {
-        return ObjectifyService.ofy()
-                .load()
-                .type(CatalogEntity.class)
-                .filter("catalogType", catalogType)
-                .list();
+    public List<CatalogEntity> loadCompleteCatalogByType(CatalogType catalogType) {
+        return ObjectifyService.ofy().load().type(CatalogEntity.class).filter("catalogType", catalogType).list();
     }
 
-    public <T extends BasicEntity> T load(Class<T> entityClass, long id)
-    {
+    public <T extends BasicEntity> T load(Class<T> entityClass, long id) {
         return ObjectifyService.ofy().load().type(entityClass).filterKey(Key.create(entityClass, id)).first().now();
     }
 
@@ -71,12 +50,27 @@ public class BaseDao {
         ObjectifyService.ofy().save().entity(entity).now();
     }
 
+    public void delete(Class entityClass, long id)
+    {
+        BasicEntity entity = load(entityClass, id);
+        ObjectifyService.ofy().delete().entity(entity);
+    }
+
+    public UserEntity getUserByEmail(String email) {
+        return ofy().load().type(UserEntity.class).filter("email", email).first().now();
+    }
+
     public List<EventEntity> loadEventsByEventType(CatalogEntity eventType, Date serverTimestamp) {
-        return ObjectifyService.ofy()
+        return ofy()
                 .load()
                 .type(EventEntity.class)
                 .filter("eventType", Ref.create(eventType))
                 .filter("endTimestamp >", serverTimestamp)
                 .list();
+    }
+
+    public Objectify ofy()
+    {
+        return ObjectifyService.ofy();
     }
 }

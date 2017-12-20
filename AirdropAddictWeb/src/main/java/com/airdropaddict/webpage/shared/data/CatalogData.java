@@ -2,19 +2,10 @@ package com.airdropaddict.webpage.shared.data;
 
 import java.io.Serializable;
 
-public class CatalogData implements Serializable {
-    private long id;
+public class CatalogData extends EntityData implements Serializable {
     private String code;
     private String name;
     private CatalogType catalogType;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getCode() {
         return code;
