@@ -1,7 +1,10 @@
 package com.airdropaddict.webpage.client;
 
+import static java.util.stream.IntStream.range;
+
+import com.airdropaddict.webpage.client.ui.AirdropInfoPanel;
+import com.airdropaddict.webpage.client.ui.AirdropsRowPanel;
 import com.airdropaddict.webpage.shared.FieldVerifier;
-import com.airdropaddict.webpage.shared.data.EventData;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -18,29 +21,17 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import java.util.List;
-
-/**
- * Entry point classes define <code>onModuleLoad()</code>.
- */
 public class AirdropAddictWeb implements EntryPoint {
-	/**
-	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
-	 */
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network " + "connection and try again.";
 
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
-	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 	private final EventServiceAsync eventService = GWT.create(EventService.class);
 
-	/**
-	 * This is the entry point method.
-	 */
 	public void onModuleLoad() {
+		RootPanel pageWrapper = RootPanel.get("page-wrapper");
+		range(0, 4).mapToObj(i -> new AirdropsRowPanel(pageWrapper))
+				.forEachOrdered(r -> range(0, 4).forEachOrdered(i -> new AirdropInfoPanel(r)));
+
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");
@@ -89,25 +80,16 @@ public class AirdropAddictWeb implements EntryPoint {
 
 		// Create a handler for the sendButton and nameField
 		class MyHandler implements ClickHandler, KeyUpHandler {
-			/**
-			 * Fired when the user clicks on the sendButton.
-			 */
 			public void onClick(ClickEvent event) {
 				sendNameToServer();
 			}
 
-			/**
-			 * Fired when the user types in the nameField.
-			 */
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 					sendNameToServer();
 				}
 			}
 
-			/**
-			 * Send the name from the nameField to the server and wait for a response.
-			 */
 			private void sendNameToServer() {
 				// First, we validate the input.
 				errorLabel.setText("");
@@ -121,7 +103,7 @@ public class AirdropAddictWeb implements EntryPoint {
 				sendButton.setEnabled(false);
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
-//				eventService.getActiveEvents(1, new AsyncCallback<List<EventData>>() {
+				// eventService.getActiveEvents(1, new AsyncCallback<List<EventData>>() {
 				eventService.initializeCatalogs(new AsyncCallback<Boolean>() {
 					public void onFailure(Throwable caught) {
 						// Show the RPC error message to the user
@@ -143,7 +125,6 @@ public class AirdropAddictWeb implements EntryPoint {
 			}
 		}
 
-		// Add a handler to send the name to the server
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);

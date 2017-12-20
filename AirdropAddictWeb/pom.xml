@@ -1,187 +1,219 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <!-- POM file generated with GWT webAppCreator -->
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.airdropaddict.webpage</groupId>
-  <artifactId>AirdropAddictWeb</artifactId>
-  <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>com.airdropaddict.webpage.AirdropAddictWeb</name>
+	<!-- POM file generated with GWT webAppCreator -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.airdropaddict.webpage</groupId>
+	<artifactId>AirdropAddictWeb</artifactId>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>com.airdropaddict.webpage.AirdropAddictWeb</name>
 
-  <properties>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 
-    <!-- Setting maven.compiler.source to something different to 1.8
-         needs that you configure the sourceLevel in gwt-maven-plugin since
-         GWT compiler 2.8 requires 1.8 (see gwt-maven-plugin block below) -->
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+		<google.gwt.version>2.8.2</google.gwt.version>
+		<gwtmaterialdesign.version>2.0</gwtmaterialdesign.version>
 
-    <google.appengine.version>1.9.59</google.appengine.version>
-    <guava.version>23.5-jre</guava.version>
-    <objectify.version>5.1.21</objectify.version>
+		<google.appengine.version>1.9.59</google.appengine.version>
+		<guava.version>23.5-jre</guava.version>
+		<objectify.version>5.1.21</objectify.version>
+		<junit.version>4.11</junit.version>
 
-    <!-- Don't let your Mac use a crazy non-standard encoding -->
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
+		<!-- Don't let your Mac use a crazy non-standard encoding -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
 
-  <dependencyManagement>
-    <dependencies>
-      <!-- ensure all GWT deps use the same version (unless overridden) -->
-      <dependency>
-        <groupId>com.google.gwt</groupId>
-        <artifactId>gwt</artifactId>
-        <version>2.8.2</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.github.gwtmaterialdesign</groupId>
-        <artifactId>gwt-material</artifactId>
-        <version>2.0</version>
-      </dependency>
-      <dependency>
-        <groupId>com.github.gwtmaterialdesign</groupId>
-        <artifactId>gwt-material-addins</artifactId>
-        <version>2.0</version>
-      </dependency>
-      <dependency>
-        <groupId>com.github.gwtmaterialdesign</groupId>
-        <artifactId>gwt-material-themes</artifactId>
-        <version>2.0</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.google.gwt</groupId>
+				<artifactId>gwt</artifactId>
+				<version>${google.gwt.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.google.appengine</groupId>
-      <artifactId>appengine-api-1.0-sdk</artifactId>
-      <version>${google.appengine.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-servlet</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-user</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-dev</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.github.gwtmaterialdesign</groupId>
-      <artifactId>gwt-material</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.github.gwtmaterialdesign</groupId>
-      <artifactId>gwt-material-addins</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.github.gwtmaterialdesign</groupId>
-      <artifactId>gwt-material-themes</artifactId>
-      <scope>provided</scope>
-    </dependency>
+			<dependency>
+				<groupId>com.github.gwtmaterialdesign</groupId>
+				<artifactId>gwt-material</artifactId>
+				<version>${gwtmaterialdesign.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.gwtmaterialdesign</groupId>
+				<artifactId>gwt-material-addins</artifactId>
+				<version>${gwtmaterialdesign.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.gwtmaterialdesign</groupId>
+				<artifactId>gwt-material-themes</artifactId>
+				<version>${gwtmaterialdesign.version}</version>
+			</dependency>
 
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>${guava.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.googlecode.objectify</groupId>
-      <artifactId>objectify</artifactId>
-      <version>${objectify.version}</version>
-    </dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.googlecode.objectify</groupId>
+				<artifactId>objectify</artifactId>
+				<version>${objectify.version}</version>
+			</dependency>
 
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.appengine</groupId>
-      <artifactId>appengine-api-stubs</artifactId>
-      <version>1.9.59</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.appengine</groupId>
-      <artifactId>appengine-testing</artifactId>
-      <version>1.9.59</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+			<dependency>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-api-stubs</artifactId>
+				<version>${google.appengine.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-testing</artifactId>
+				<version>${google.appengine.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-api-1.0-sdk</artifactId>
+				<version>${google.appengine.version}</version>
+			</dependency>
 
-  <build>
-    <!-- Output classes directly into the webapp, so that IDEs and "mvn process-classes" update them in DevMode -->
-    <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
-    <plugins>
+	<dependencies>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
-      <!-- GWT Maven Plugin-->
-      <plugin>
-        <groupId>net.ltgt.gwt.maven</groupId>
-        <artifactId>gwt-maven-plugin</artifactId>
-        <version>1.0-rc-6</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>import-sources</goal>
-              <goal>compile</goal>
-              <goal>import-test-sources</goal>
-              <goal>test</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <moduleName>com.airdropaddict.webpage.AirdropAddictWeb</moduleName>
-          <moduleShortName>AirdropAddictWeb</moduleShortName>
-          <failOnError>true</failOnError>
-          <!-- GWT compiler 2.8 requires 1.8, hence define sourceLevel here if you use
-               a different source language for java compilation -->
-          <sourceLevel>1.8</sourceLevel>
-          <!-- Compiler configuration -->
-          <compilerArgs>
-            <!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->
-            <arg>-compileReport</arg>
-            <arg>-XcompilerMetrics</arg>
-          </compilerArgs>
-          <!-- DevMode configuration -->
-          <warDir>${project.build.directory}/${project.build.finalName}</warDir>
-          <classpathScope>compile+runtime</classpathScope>
-          <!-- URL(s) that should be opened by DevMode (gwt:devmode). -->
-          <startupUrls>
-            <startupUrl>AirdropAddictWeb.html</startupUrl>
-          </startupUrls>
-        </configuration>
-      </plugin>
+		<dependency>
+			<groupId>com.github.gwtmaterialdesign</groupId>
+			<artifactId>gwt-material</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.gwtmaterialdesign</groupId>
+			<artifactId>gwt-material-addins</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.gwtmaterialdesign</groupId>
+			<artifactId>gwt-material-themes</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
-      <plugin>
-        <groupId>com.google.appengine</groupId>
-        <artifactId>appengine-maven-plugin</artifactId>
-        <version>${google.appengine.version}</version>
-      </plugin>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.objectify</groupId>
+			<artifactId>objectify</artifactId>
+		</dependency>
 
-      <!-- Skip normal test execution, we use gwt:test instead -->
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.17</version>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-stubs</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-testing</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-sdk</artifactId>
+		</dependency>
 
-    </plugins>
-  </build>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<!-- Output classes directly into the webapp, so that IDEs and "mvn process-classes" 
+			update them in DevMode -->
+		<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
+
+		<plugins>
+
+			<!-- GWT Maven Plugin -->
+			<plugin>
+				<groupId>net.ltgt.gwt.maven</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>1.0-rc-6</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>import-sources</goal>
+							<goal>compile</goal>
+							<goal>import-test-sources</goal>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<moduleName>com.airdropaddict.webpage.AirdropAddictWeb</moduleName>
+					<moduleShortName>AirdropAddictWeb</moduleShortName>
+					<failOnError>true</failOnError>
+					<!-- GWT compiler 2.8 requires 1.8, hence define sourceLevel here if 
+						you use a different source language for java compilation -->
+					<sourceLevel>1.8</sourceLevel>
+					<!-- Compiler configuration -->
+					<compilerArgs>
+						<!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->
+						<arg>-compileReport</arg>
+						<arg>-XcompilerMetrics</arg>
+					</compilerArgs>
+					<!-- DevMode configuration -->
+					<warDir>${project.build.directory}/${project.build.finalName}</warDir>
+					<classpathScope>compile+runtime</classpathScope>
+					<!-- URL(s) that should be opened by DevMode (gwt:devmode). -->
+					<startupUrls>
+						<startupUrl>AirdropAddictWeb.html</startupUrl>
+					</startupUrls>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-maven-plugin</artifactId>
+				<version>${google.appengine.version}</version>
+			</plugin>
+
+			<!-- Skip normal test execution, we use gwt:test instead -->
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
 </project>
