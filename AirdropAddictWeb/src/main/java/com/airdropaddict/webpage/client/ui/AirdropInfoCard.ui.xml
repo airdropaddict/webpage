@@ -10,7 +10,7 @@
 	</ui:style>
 
 	<g:HTMLPanel>
-		<m:MaterialColumn grid="l3 m4 s12">
+		<m:MaterialColumn grid="l4 m6 s12">
 			<m:MaterialCard ui:field="card">
 				<m:MaterialCardContent textColor="WHITE"
 					backgroundColor="LIGHT_BLUE" padding="5" border="5">
@@ -22,8 +22,7 @@
 						text="I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively." />
 				</m:MaterialCardContent>
 				<m:MaterialCardAction>
-					<m:MaterialLink text="Link 1" textColor="BLUE" />
-					<m:MaterialLink text="Link 1" textColor="BLUE" />
+					<m:MaterialLink text="More..." textColor="BLUE" />
 					<ma:rating.MaterialRating textColor="AMBER_LIGHTEN_1" />
 				</m:MaterialCardAction>
 			</m:MaterialCard>

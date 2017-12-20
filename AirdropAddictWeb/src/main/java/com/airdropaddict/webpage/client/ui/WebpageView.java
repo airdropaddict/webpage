@@ -22,7 +22,8 @@ public class WebpageView extends Composite {
 
 	public WebpageView() {
 		initWidget(uiBinder.createAndBindUi(this));
-		range(0, 4).mapToObj(i -> new MaterialRow()).peek(r -> content.add(r))
-				.forEachOrdered(r -> range(0, 3).forEachOrdered(i -> r.add(new AirdropInfoCard())));
+		MaterialRow row = new MaterialRow();
+		content.add(row);
+		range(0, 12).forEachOrdered(i -> row.add(new AirdropInfoCard("Airdrop " + i)));
 	}
 }
