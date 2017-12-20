@@ -20,12 +20,12 @@ public class AirdropInfoCard extends Composite {
 	@UiField
 	MaterialLabel content;
 
-	public AirdropInfoCard(String text) {
+	public AirdropInfoCard(String title) {
 		initWidget(uiBinder.createAndBindUi(this));
-		setTitle(text);
+		setTitle(title);
 	}
 
-	public void setTitle(String text) {
-		title.setText(text);
+	public void setTitle(String titlText) {
+		title.setText(titlText);
 	}
 }

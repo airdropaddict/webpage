@@ -2,15 +2,6 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:m="urn:import:gwt.material.design.client.ui">
 	<ui:style>
-	@external side-nav, active;
-	.side-nav li.active a {
-		color: #2196f3 !important;
-	}
-	
-	.side-nav li.active {
-		background: #fff !important;
-	}
-	
 	.customFooter {
 		padding-left: 0 !important;
 		margin-bottom: 20px;
@@ -23,10 +14,13 @@
 				shadow="1" depth="996">
 				<m:MaterialNavBar backgroundColor="LIGHT_BLUE"
 					activates="sidenavGplus">
-					<m:MaterialNavBrand paddingLeft="60" text="AirdropAddict" />
+					<m:MaterialNavSection paddingLeft="30" paddingRight="0">
+						<m:MaterialImage url="./images/logo.png" />
+					</m:MaterialNavSection>
+					<m:MaterialNavBrand paddingLeft="30" text="AirdropAddict"
+						fontSize="3.0em" fontWeight="BOLD" />
 					<m:MaterialNavSection float="RIGHT">
 						<m:MaterialLink iconType="APPS" />
-						<m:MaterialLink iconType="NOTIFICATIONS" />
 					</m:MaterialNavSection>
 				</m:MaterialNavBar>
 			</m:MaterialHeader>

@@ -11,10 +11,11 @@
 
 	<g:HTMLPanel>
 		<m:MaterialColumn grid="l4 m6 s12">
-			<m:MaterialCard ui:field="card">
+			<m:MaterialCard ui:field="card" hoverable="true">
 				<m:MaterialCardContent textColor="WHITE"
 					backgroundColor="LIGHT_BLUE" padding="5" border="5" paddingLeft="15">
-					<m:MaterialCardTitle text="Sample" ui:field="title" />
+					<m:MaterialCardTitle text="Sample" ui:field="title"
+						addStyleNames="truncate" />
 				</m:MaterialCardContent>
 				<m:MaterialCardContent backgroundColor="WHITE">
 					<m:MaterialLabel ui:field="content"
@@ -26,9 +27,10 @@
 							<ma:rating.MaterialRating textColor="AMBER_LIGHTEN_1"
 								border="0" />
 						</m:MaterialColumn>
-						<m:MaterialColumn grid="s3" border="0" padding="5">
+						<m:MaterialColumn grid="s3" border="0" padding="5"
+							textAlign="RIGHT">
 							<m:MaterialLink text="More" textColor="BLUE"
-								border="0" />
+								border="0" float="RIGHT" />
 						</m:MaterialColumn>
 					</m:MaterialRow>
 				</m:MaterialCardAction>
