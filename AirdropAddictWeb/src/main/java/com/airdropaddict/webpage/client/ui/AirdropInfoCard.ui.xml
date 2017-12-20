@@ -13,17 +13,24 @@
 		<m:MaterialColumn grid="l4 m6 s12">
 			<m:MaterialCard ui:field="card">
 				<m:MaterialCardContent textColor="WHITE"
-					backgroundColor="LIGHT_BLUE" padding="5" border="5">
-					<m:MaterialCardTitle text="Sample" iconType="FAVORITE"
-						iconPosition="RIGHT" iconColor="RED" ui:field="title" />
+					backgroundColor="LIGHT_BLUE" padding="5" border="5" paddingLeft="15">
+					<m:MaterialCardTitle text="Sample" ui:field="title" />
 				</m:MaterialCardContent>
 				<m:MaterialCardContent backgroundColor="WHITE">
 					<m:MaterialLabel ui:field="content"
 						text="I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively." />
 				</m:MaterialCardContent>
-				<m:MaterialCardAction>
-					<m:MaterialLink text="More..." textColor="BLUE" />
-					<ma:rating.MaterialRating textColor="AMBER_LIGHTEN_1" />
+				<m:MaterialCardAction padding="0">
+					<m:MaterialRow border="5" padding="5">
+						<m:MaterialColumn grid="s9" border="0">
+							<ma:rating.MaterialRating textColor="AMBER_LIGHTEN_1"
+								border="0" />
+						</m:MaterialColumn>
+						<m:MaterialColumn grid="s3" border="0" padding="5">
+							<m:MaterialLink text="More" textColor="BLUE"
+								border="0" />
+						</m:MaterialColumn>
+					</m:MaterialRow>
 				</m:MaterialCardAction>
 			</m:MaterialCard>
 		</m:MaterialColumn>
