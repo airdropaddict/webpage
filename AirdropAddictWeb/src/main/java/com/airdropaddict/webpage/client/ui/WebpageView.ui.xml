@@ -1,0 +1,46 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:m="urn:import:gwt.material.design.client.ui">
+	<ui:style>
+	@external side-nav, active;
+	.side-nav li.active a {
+		color: #2196f3 !important;
+	}
+	
+	.side-nav li.active {
+		background: #fff !important;
+	}
+	
+	.customFooter {
+		padding-left: 0 !important;
+		margin-bottom: 20px;
+	}
+	</ui:style>
+
+	<g:HTMLPanel>
+		<m:MaterialPanel>
+			<m:MaterialHeader layoutPosition="FIXED" width="100%"
+				shadow="1" depth="996">
+				<m:MaterialNavBar backgroundColor="LIGHT_BLUE"
+					activates="sidenavGplus">
+					<m:MaterialNavBrand paddingLeft="60" text="AirdropAddict" />
+					<m:MaterialNavSection float="RIGHT">
+						<m:MaterialLink iconType="APPS" />
+						<m:MaterialLink iconType="NOTIFICATIONS" />
+					</m:MaterialNavSection>
+				</m:MaterialNavBar>
+			</m:MaterialHeader>
+
+			<m:MaterialContainer paddingLeft="250"
+				paddingRight="180" paddingTop="140" ui:field="content">
+			</m:MaterialContainer>
+
+			<m:MaterialFooter>
+				<m:MaterialFooterCopyright
+					backgroundColor="LIGHT_BLUE" addStyleNames="customFooter">
+					<m:MaterialLabel text="© Copyright AirdropAddict" />
+				</m:MaterialFooterCopyright>
+			</m:MaterialFooter>
+		</m:MaterialPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 
