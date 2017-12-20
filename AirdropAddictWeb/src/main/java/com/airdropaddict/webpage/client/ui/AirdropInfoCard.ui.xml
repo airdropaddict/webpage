@@ -12,11 +12,12 @@
 	<g:HTMLPanel>
 		<m:MaterialColumn grid="l4 m6 s12">
 			<m:MaterialCard ui:field="card" hoverable="true">
-				<m:MaterialCardContent textColor="WHITE"
-					backgroundColor="LIGHT_BLUE" padding="5" border="5" paddingLeft="15">
-					<m:MaterialCardTitle text="Sample" ui:field="title"
+				<m:MaterialCardContent textColor="LIGHT_BLUE"
+					backgroundColor="WHITE" padding="5" border="5" paddingLeft="15">
+					<m:MaterialCardTitle ui:field="title"
 						addStyleNames="truncate" />
 				</m:MaterialCardContent>
+				<m:MaterialDivider />
 				<m:MaterialCardContent backgroundColor="WHITE">
 					<m:MaterialLabel ui:field="content"
 						text="I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively." />
@@ -29,8 +30,8 @@
 						</m:MaterialColumn>
 						<m:MaterialColumn grid="s3" border="0" padding="5"
 							textAlign="RIGHT">
-							<m:MaterialLink text="More" textColor="BLUE"
-								border="0" float="RIGHT" />
+							<m:MaterialLink textColor="BLUE" border="0" float="RIGHT"
+								fontSize="1.4em" iconType="ADD_BOX" iconPosition="RIGHT" />
 						</m:MaterialColumn>
 					</m:MaterialRow>
 				</m:MaterialCardAction>
