@@ -4,9 +4,9 @@
 	xmlns:my="urn:import:com.airdropaddict.webpage.client.ui" xmlns:mt="urn:import:gwt.material.design.client.ui.table">
 	<g:HTMLPanel>
 		<m:MaterialContainer>
-			<!-- <mt:MaterialDataTable shadow="1" marginTop="20"
+			<mt:MaterialDataTable shadow="1" marginTop="20"
 				ui:field="table" height="100%" useStickyHeader="true" useCategories="false"
-				useRowExpansion="true" selectionType="NONE" /> -->
+				useRowExpansion="false" selectionType="NONE" />
 			<my:NavigationContainer>
 			</my:NavigationContainer>
 		</m:MaterialContainer>
