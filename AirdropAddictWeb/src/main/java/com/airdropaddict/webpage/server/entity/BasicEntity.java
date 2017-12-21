@@ -2,7 +2,7 @@ package com.airdropaddict.webpage.server.entity;
 
 import com.googlecode.objectify.annotation.Id;
 
-public class BasicEntity {
+public abstract class BasicEntity {
     @Id
     Long id;
 

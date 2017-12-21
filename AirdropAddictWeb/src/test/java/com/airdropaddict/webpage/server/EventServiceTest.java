@@ -198,6 +198,31 @@ public class EventServiceTest {
         assertEquals("Rating status ip has invalid value", accessData.getIp(), updatedEvent.getRateStatus().getIp());
     }
 
+    @Test
+    public void saveTasks()
+    {
+        AccessData accessData = prepareAnonymousAccessData();
+        EventData event = prepareTestEvent();
+        long id = eventService.saveEvent(event);
+        assertTrue("Nonzero id should be returned", id != 0);
+        event = eventService.getEventById(id, accessData);
+        event.getTasks().put("TEST", "TestValue1");
+        event.getTasks().put("ANOTHERTEST", "TestValue2");
+        eventService.saveEvent(event);
+        event = eventService.getEventById(id, accessData);
+        assertEquals("Invalid number of tasks", 2, event.getTasks().size());
+        assertEquals("Invalid task value", "TestValue1", event.getTasks().get("TEST"));
+        assertEquals("Invalid task value", "TestValue2", event.getTasks().get("ANOTHERTEST"));
+        event.getTasks().put("TEST", "TestV@lue111");
+        event.getTasks().put("THIRDTEST","testValue3");
+        eventService.saveEvent(event);
+        event = eventService.getEventById(id, accessData);
+        assertEquals("Invalid number of tasks", 3, event.getTasks().size());
+        assertEquals("Invalid task value", "TestV@lue111", event.getTasks().get("TEST"));
+        assertEquals("Invalid task value", "TestValue2", event.getTasks().get("ANOTHERTEST"));
+        assertEquals("Invalid task value", "testValue3", event.getTasks().get("THIRDTEST"));
+    }
+
     private EventData prepareTestEvent() {
         CatalogData airdropEventType = fetchAirdropEventType();
         EventData event = new EventData();

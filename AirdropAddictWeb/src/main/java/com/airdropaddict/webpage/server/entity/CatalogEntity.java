@@ -2,11 +2,13 @@ package com.airdropaddict.webpage.server.entity;
 
 import com.airdropaddict.webpage.shared.data.CatalogData;
 import com.airdropaddict.webpage.shared.data.CatalogType;
+import com.airdropaddict.webpage.shared.data.EntityData;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
+import com.sun.javaws.exceptions.InvalidArgumentException;
 
 @Entity
-public class CatalogEntity extends BasicEntity {
+public class CatalogEntity extends BasicEntity  {
     @Index
     String code;
     String name;
@@ -35,14 +37,5 @@ public class CatalogEntity extends BasicEntity {
 
     public void setCatalogType(CatalogType catalogType) {
         this.catalogType = catalogType;
-    }
-
-    public CatalogData toData() {
-        CatalogData catalog = new CatalogData();
-        catalog.setId(id);
-        catalog.setCode(code);
-        catalog.setName(name);
-        catalog.setCatalogType(catalogType);
-        return catalog;
     }
 }

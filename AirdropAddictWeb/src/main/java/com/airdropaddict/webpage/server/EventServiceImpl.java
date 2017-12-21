@@ -1,11 +1,8 @@
 package com.airdropaddict.webpage.server;
 
 import com.airdropaddict.webpage.client.EventService;
-import com.airdropaddict.webpage.server.entity.CatalogEntity;
-import com.airdropaddict.webpage.server.entity.RateInfo;
-import com.airdropaddict.webpage.server.entity.UserEntity;
+import com.airdropaddict.webpage.server.entity.*;
 import com.airdropaddict.webpage.shared.data.*;
-import com.airdropaddict.webpage.server.entity.EventEntity;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Ref;
@@ -33,19 +30,43 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
     @Override
     public List<CatalogData> loadCatalogByType(CatalogType catalogType) throws IllegalArgumentException {
         List<CatalogEntity> catalog = BaseDao.getInstance().loadCompleteCatalogByType(catalogType);
-        return catalog.stream().map(CatalogEntity::toData).collect(Collectors.toList());
+        return catalog.stream().map(new CatalogConverter()).collect(Collectors.toList());
     }
 
     @Override
     public CatalogData getCatalogByTypeAndCode(CatalogType catalogType, String code) throws IllegalArgumentException {
         CatalogEntity catalog = BaseDao.getInstance().getCatalogByTypeAndCode(catalogType, code);
-        return catalog == null ? null : catalog.toData();
+        return catalog == null ? null : new CatalogConverter().apply(catalog);
+    }
+
+    @Override
+    public List<TaskTemplateData> getTaskTemplates() throws IllegalArgumentException {
+        List<TaskTemplateEntity> taskTemplates = BaseDao.getInstance().loadAll(TaskTemplateEntity.class);
+        return taskTemplates.stream().map(new TaskTemplateConverter()).collect(Collectors.toList());
+    }
+
+    @Override
+    public void saveTaskTemplate(TaskTemplateData taskTemplate) throws IllegalArgumentException {
+        TaskTemplateEntity taskTemplateEntity;
+        if (taskTemplate.getId() != 0) {
+            taskTemplateEntity = BaseDao.getInstance().load(TaskTemplateEntity.class, taskTemplate.getId());
+        }
+        else {
+            taskTemplateEntity = new TaskTemplateEntity();
+        }
+        new TaskTemplateUpdater().accept(taskTemplateEntity, taskTemplate);
+        BaseDao.getInstance().save(taskTemplateEntity);
+    }
+
+    @Override
+    public void deleteTaskTemplate(long taskTemplateId) throws IllegalArgumentException {
+        BaseDao.getInstance().delete(TaskTemplateEntity.class, taskTemplateId);
     }
 
     @Override
     public UserData getUserByEmail(String email) throws IllegalArgumentException {
         UserEntity user = BaseDao.getInstance().getUserByEmail(email);
-        return user == null ? null : user.toData();
+        return user == null ? null : new UserConverter().apply(user);
     }
 
     @Override
@@ -56,7 +77,7 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
     @Override
     public EventData getEventById(long id, AccessData access) throws IllegalArgumentException {
         EventEntity event = BaseDao.getInstance().load(EventEntity.class, id);
-        return event == null ? null : event.toData(access);
+        return event == null ? null : new EventConverter(access).apply(event);
     }
 
     @Override
@@ -68,13 +89,8 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
             throw new IllegalArgumentException("Empty event name was given.");
         }
 
-        CatalogEntity eventType = BaseDao.getInstance().getCatalogByTypeAndCode(CatalogType.EVENT_TYPE, event.getEventType().getCode());
         EventEntity eventEntity = new EventEntity();
-        eventEntity.setEventType(Ref.create(eventType));
-        eventEntity.setName(event.getName());
-        eventEntity.setDescription(event.getDescription());
-        eventEntity.setStartTimestamp(event.getStartTimestamp());
-        eventEntity.setEndTimestamp(event.getEndTimestamp());
+        new EventUpdater().accept(eventEntity, event);
         BaseDao.getInstance().save(eventEntity);
         return eventEntity.getId();
     }
@@ -88,10 +104,7 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
             throw new IllegalArgumentException("Empty event name was given.");
         }
         EventEntity eventEntity = BaseDao.getInstance().load(EventEntity.class, event.getId());
-        eventEntity.setName(event.getName());
-        eventEntity.setDescription(event.getDescription());
-        eventEntity.setStartTimestamp(event.getStartTimestamp());
-        eventEntity.setEndTimestamp(event.getEndTimestamp());
+        new EventUpdater().accept(eventEntity, event);
         BaseDao.getInstance().save(eventEntity);
     }
 
@@ -108,7 +121,10 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
             // Get events filtered by endTimestamp
             List<EventEntity> events = BaseDao.getInstance().loadEventsByEventType(eventType, serverTimestamp);
             // Filter in memory by startTimestamp
-            return events.stream().filter(e -> e.getStartTimestamp().before(serverTimestamp)).map(e -> e.toData(access)).collect(Collectors.toList());
+            return events.stream()
+                    .filter(e -> e.getStartTimestamp().before(serverTimestamp))
+                    .map(e -> new EventConverter(access).apply(e))
+                    .collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -152,7 +168,7 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
         }
         event.setRating((float)event.getRateHistory().stream().mapToInt(RateInfo::getRating).average().getAsDouble());
         BaseDao.getInstance().save(event);
-        return event.toData(access);
+        return new EventConverter(access).apply(event);
     }
 
     private boolean addToCatalogIfNotExists(List<CatalogEntity> catalog, CatalogType catalogType, String code, String name) {

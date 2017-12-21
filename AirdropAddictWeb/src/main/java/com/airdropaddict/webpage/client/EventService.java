@@ -13,6 +13,10 @@ public interface EventService extends RemoteService
     List<CatalogData> loadCatalogByType(CatalogType catalogType) throws IllegalArgumentException;
     CatalogData getCatalogByTypeAndCode(CatalogType catalogType, String code) throws IllegalArgumentException;
 
+    List<TaskTemplateData> getTaskTemplates() throws IllegalArgumentException;
+    void saveTaskTemplate(TaskTemplateData taskTemplate) throws IllegalArgumentException;
+    void deleteTaskTemplate(long taskTemplateId) throws IllegalArgumentException;
+
     UserData getUserByEmail(String email) throws IllegalArgumentException;
     long saveUser(UserData user) throws IllegalArgumentException;
 
