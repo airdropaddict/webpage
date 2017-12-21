@@ -1,41 +1,38 @@
 package com.airdropaddict.webpage.server.entity;
 
-import com.airdropaddict.webpage.shared.data.CatalogData;
 import com.airdropaddict.webpage.shared.data.CatalogType;
-import com.airdropaddict.webpage.shared.data.EntityData;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 
 @Entity
-public class CatalogEntity extends BasicEntity  {
-    @Index
-    String code;
-    String name;
-    @Index
-    CatalogType catalogType;
+public class CatalogEntity extends BasicEntity {
+	@Index
+	String code;
+	String name;
+	@Index
+	CatalogType catalogType;
 
-    public String getCode() {
-        return code;
-    }
+	public String getCode() {
+		return code;
+	}
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public CatalogType getCatalogType() {
-        return catalogType;
-    }
+	public CatalogType getCatalogType() {
+		return catalogType;
+	}
 
-    public void setCatalogType(CatalogType catalogType) {
-        this.catalogType = catalogType;
-    }
+	public void setCatalogType(CatalogType catalogType) {
+		this.catalogType = catalogType;
+	}
 }
