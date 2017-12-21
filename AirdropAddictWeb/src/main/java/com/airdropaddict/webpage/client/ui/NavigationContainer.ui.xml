@@ -1,0 +1,18 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:m="urn:import:gwt.material.design.client.ui">
+	<g:HTMLPanel>
+		<m:MaterialRow paddingBottom="50">
+			<m:MaterialColumn grid="s2" offset="s4">
+				<m:MaterialButton text="Newer" waves="LIGHT"
+					backgroundColor="LIGHT_BLUE" textColor="WHITE" iconType="ARROW_BACK"
+					iconPosition="LEFT" enabled="false" />
+			</m:MaterialColumn>
+			<m:MaterialColumn grid="s2">
+				<m:MaterialButton text="Older" waves="LIGHT"
+					textColor="WHITE" iconType="ARROW_FORWARD" iconPosition="RIGHT"
+					backgroundColor="LIGHT_BLUE" />
+			</m:MaterialColumn>
+		</m:MaterialRow>
+	</g:HTMLPanel>
+</ui:UiBinder> 

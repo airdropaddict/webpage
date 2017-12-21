@@ -9,10 +9,10 @@ import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.client.ui.MaterialCardTitle;
 import gwt.material.design.client.ui.MaterialLabel;
 
-public class AirdropInfoCard extends Composite {
+public class AirdropCard extends Composite {
 	private static AirdropInfoCardUiBinder uiBinder = GWT.create(AirdropInfoCardUiBinder.class);
 
-	interface AirdropInfoCardUiBinder extends UiBinder<Widget, AirdropInfoCard> {
+	interface AirdropInfoCardUiBinder extends UiBinder<Widget, AirdropCard> {
 	}
 
 	@UiField
@@ -20,7 +20,7 @@ public class AirdropInfoCard extends Composite {
 	@UiField
 	MaterialLabel content;
 
-	public AirdropInfoCard(String title) {
+	public AirdropCard(String title) {
 		initWidget(uiBinder.createAndBindUi(this));
 		setTitle(title);
 	}
