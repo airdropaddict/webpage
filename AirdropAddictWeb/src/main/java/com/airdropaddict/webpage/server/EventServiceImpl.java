@@ -133,7 +133,8 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
     }
 
     @Override
-    public List<EventData> findEvents(String eventTypeCode, EventResultType resultType, int resultsPerPage, int page, AccessData access) {
+    public PageData<EventData> findEvents(String eventTypeCode, EventResultType resultType, int resultsPerPage, int page, AccessData access) {
+        List<EventData> results;
         try {
             CatalogEntity eventType = BaseDao.getInstance().getCatalogByTypeAndCode(CatalogType.EVENT_TYPE, eventTypeCode);
             Date serverTimestamp = new Date();
@@ -141,35 +142,43 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
 
             List<EventEntity> events;
             if (resultType == EventResultType.EXPIRED) {
-                int endIndex = resultsPerPage * (page+1) - 1;
-                // Get events filtered by endTimestamp and paged by DB
-                events = BaseDao.getInstance().loadCompletedEvents(eventType, serverTimestamp).subList(startIndex, endIndex);
-                return events.stream()
-                    .map(e -> new EventConverter(access).apply(e))
-                    .collect(Collectors.toList());
+                // Get events filtered by endTimestamp
+                events = BaseDao.getInstance().loadCompletedEvents(eventType, serverTimestamp);
+                results = events.stream()
+                        .skip(startIndex)
+                        .limit(resultsPerPage+1)
+                        .map(e -> new EventConverter(access).apply(e))
+                        .collect(Collectors.toList());
             }
             else {
                 // Get events filtered by endTimestamp
                 events = BaseDao.getInstance().loadNonCompletedEvents(eventType, serverTimestamp);
                 if (resultType == EventResultType.ACTIVE) {
                     // Filter in memory by startTimestamp and do paging
-                    return events.stream()
+                    results = events.stream()
                         .filter(e -> e.getStartTimestamp().before(serverTimestamp))
                         .skip(startIndex)
-                        .limit(resultsPerPage)
+                        .limit(resultsPerPage+1)
                         .map(e -> new EventConverter(access).apply(e))
                         .collect(Collectors.toList());
                 }
                 else { // EventResultType.WAITING_FOR_ACTIVATION
                     // Filter in memory by startTimestamp and do paging
-                    return events.stream()
+                    results = events.stream()
                         .filter(e -> e.getStartTimestamp().after(serverTimestamp))
                         .skip(startIndex)
-                        .limit(resultsPerPage)
+                        .limit(resultsPerPage+1)
                         .map(e -> new EventConverter(access).apply(e))
                         .collect(Collectors.toList());
                 }
             }
+            boolean lastPage = true;
+            if (results.size() > resultsPerPage)
+            {
+                results.remove(results.size()-1);
+                lastPage = false;
+            }
+            return new PageData<>(results, lastPage);
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

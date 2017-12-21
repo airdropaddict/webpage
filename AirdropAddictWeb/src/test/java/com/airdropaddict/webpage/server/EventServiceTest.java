@@ -98,16 +98,21 @@ public class EventServiceTest {
         eventService.saveEvent(prepareTestEvent());
         eventService.saveEvent(prepareTestEvent());
         eventService.saveEvent(prepareTestEvent());
-        List<EventData> events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 0, accessData);
-        assertEquals("Invalid result size", 3, events.size());
-        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 1, accessData);
-        assertEquals("Invalid result size", 2, events.size());
-        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 2, accessData);
-        assertEquals("Invalid result size", 0, events.size());
-        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 0, accessData);
-        assertEquals("Invalid result size", 5, events.size());
-        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 99999, accessData);
-        assertEquals("Invalid result size", 0, events.size());
+        PageData<EventData> pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 0, accessData);
+        assertEquals("Invalid result size", 3, pageInfo.getItems().size());
+        assertFalse("Should not be last page", pageInfo.isLastPage());
+        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 1, accessData);
+        assertEquals("Invalid result size", 2, pageInfo.getItems().size());
+        assertTrue("Should be last page", pageInfo.isLastPage());
+        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 2, accessData);
+        assertEquals("Invalid result size", 0, pageInfo.getItems().size());
+        assertTrue("Should be last page", pageInfo.isLastPage());
+        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 0, accessData);
+        assertEquals("Invalid result size", 5, pageInfo.getItems().size());
+        assertTrue("Should be last page", pageInfo.isLastPage());
+        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 99999, accessData);
+        assertEquals("Invalid result size", 0, pageInfo.getItems().size());
+        assertTrue("Should be last page", pageInfo.isLastPage());
     }
 
     @Test
@@ -124,22 +129,30 @@ public class EventServiceTest {
         eventService.saveEvent(prepareFutureEvent());
         eventService.saveEvent(prepareFutureEvent());
         eventService.saveEvent(prepareFutureEvent());
-        List<EventData> events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 0, accessData);
-        assertEquals("Invalid result size", 3, events.size());
-        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 1, accessData);
-        assertEquals("Invalid result size", 2, events.size());
-        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 2, accessData);
-        assertEquals("Invalid result size", 0, events.size());
-        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 0, accessData);
-        assertEquals("Invalid result size", 5, events.size());
-        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 99999, accessData);
-        assertEquals("Invalid result size", 0, events.size());
-        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.EXPIRED, 3, 0, accessData);
-        assertEquals("Invalid result size", 2, events.size());
-        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.FUTURE, 2, 0, accessData);
-        assertEquals("Invalid result size", 2, events.size());
-        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.FUTURE, 2, 1, accessData);
-        assertEquals("Invalid result size", 1, events.size());
+        PageData<EventData> pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 0, accessData);
+        assertEquals("Invalid result size", 3, pageInfo.getItems().size());
+        assertFalse("Should not be last page", pageInfo.isLastPage());
+        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 1, accessData);
+        assertEquals("Invalid result size", 2, pageInfo.getItems().size());
+        assertTrue("Should be last page", pageInfo.isLastPage());
+        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 2, accessData);
+        assertEquals("Invalid result size", 0, pageInfo.getItems().size());
+        assertTrue("Should be last page", pageInfo.isLastPage());
+        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 0, accessData);
+        assertEquals("Invalid result size", 5, pageInfo.getItems().size());
+        assertTrue("Should be last page", pageInfo.isLastPage());
+        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 99999, accessData);
+        assertEquals("Invalid result size", 0, pageInfo.getItems().size());
+        assertTrue("Should be last page", pageInfo.isLastPage());
+        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.EXPIRED, 2, 0, accessData);
+        assertEquals("Invalid result size", 2, pageInfo.getItems().size());
+        assertTrue("Should be last page", pageInfo.isLastPage());
+        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.FUTURE, 2, 0, accessData);
+        assertEquals("Invalid result size", 2, pageInfo.getItems().size());
+        assertFalse("Should not be last page", pageInfo.isLastPage());
+        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.FUTURE, 2, 1, accessData);
+        assertEquals("Invalid result size", 1, pageInfo.getItems().size());
+        assertTrue("Should be last page", pageInfo.isLastPage());
     }
 
     @Test
