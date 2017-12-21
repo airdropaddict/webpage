@@ -4,6 +4,7 @@ import com.airdropaddict.webpage.client.EventService;
 import com.airdropaddict.webpage.server.entity.CatalogEntity;
 import com.airdropaddict.webpage.server.entity.EventEntity;
 import com.airdropaddict.webpage.server.entity.UserEntity;
+import com.airdropaddict.webpage.shared.EventResultType;
 import com.airdropaddict.webpage.shared.data.*;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
@@ -79,8 +80,7 @@ public class EventServiceTest {
     }
 
     @Test
-    public void getActiveEvents()
-    {
+    public void getActiveEvents() {
         EventData event = prepareTestEvent();
         long id = eventService.saveEvent(event);
         CatalogData airdropEventType = fetchAirdropEventType();
@@ -90,8 +90,60 @@ public class EventServiceTest {
     }
 
     @Test
-    public void saveIllegalEvent()
-    {
+    public void findEvents() {
+        CatalogData airdropEventType = fetchAirdropEventType();
+        AccessData accessData = prepareAnonymousAccessData();
+        eventService.saveEvent(prepareTestEvent());
+        eventService.saveEvent(prepareTestEvent());
+        eventService.saveEvent(prepareTestEvent());
+        eventService.saveEvent(prepareTestEvent());
+        eventService.saveEvent(prepareTestEvent());
+        List<EventData> events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 0, accessData);
+        assertEquals("Invalid result size", 3, events.size());
+        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 1, accessData);
+        assertEquals("Invalid result size", 2, events.size());
+        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 2, accessData);
+        assertEquals("Invalid result size", 0, events.size());
+        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 0, accessData);
+        assertEquals("Invalid result size", 5, events.size());
+        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 99999, accessData);
+        assertEquals("Invalid result size", 0, events.size());
+    }
+
+    @Test
+    public void findEventsMix() {
+        CatalogData airdropEventType = fetchAirdropEventType();
+        AccessData accessData = prepareAnonymousAccessData();
+        eventService.saveEvent(prepareTestEvent());
+        eventService.saveEvent(prepareTestEvent());
+        eventService.saveEvent(prepareTestEvent());
+        eventService.saveEvent(prepareTestEvent());
+        eventService.saveEvent(prepareTestEvent());
+        eventService.saveEvent(prepareExpiredEvent());
+        eventService.saveEvent(prepareExpiredEvent());
+        eventService.saveEvent(prepareFutureEvent());
+        eventService.saveEvent(prepareFutureEvent());
+        eventService.saveEvent(prepareFutureEvent());
+        List<EventData> events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 0, accessData);
+        assertEquals("Invalid result size", 3, events.size());
+        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 1, accessData);
+        assertEquals("Invalid result size", 2, events.size());
+        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 2, accessData);
+        assertEquals("Invalid result size", 0, events.size());
+        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 0, accessData);
+        assertEquals("Invalid result size", 5, events.size());
+        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 99999, accessData);
+        assertEquals("Invalid result size", 0, events.size());
+        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.EXPIRED, 3, 0, accessData);
+        assertEquals("Invalid result size", 2, events.size());
+        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.FUTURE, 2, 0, accessData);
+        assertEquals("Invalid result size", 2, events.size());
+        events = eventService.findEvents(airdropEventType.getCode(), EventResultType.FUTURE, 2, 1, accessData);
+        assertEquals("Invalid result size", 1, events.size());
+    }
+
+    @Test
+    public void saveIllegalEvent() {
         EventData event = new EventData();
         try {
             long id = eventService.saveEvent(event);
@@ -232,6 +284,30 @@ public class EventServiceTest {
         Date now = new Date();
         event.setStartTimestamp(now);
         event.setEndTimestamp(new Date(now.getTime() + 1000*60*60*24));
+        return event;
+    }
+
+    private EventData prepareExpiredEvent() {
+        CatalogData airdropEventType = fetchAirdropEventType();
+        EventData event = new EventData();
+        event.setEventType(airdropEventType);
+        event.setName("TestName-" + (++eventCounter));
+        event.setDescription("Description");
+        Date now = new Date();
+        event.setStartTimestamp(new Date(now.getTime() - 2000*60*60*24));
+        event.setEndTimestamp(new Date(now.getTime() - 1000*60*60*24));
+        return event;
+    }
+
+    private EventData prepareFutureEvent() {
+        CatalogData airdropEventType = fetchAirdropEventType();
+        EventData event = new EventData();
+        event.setEventType(airdropEventType);
+        event.setName("TestName-" + (++eventCounter));
+        event.setDescription("Description");
+        Date now = new Date();
+        event.setStartTimestamp(new Date(now.getTime() + 1000*60*60*24));
+        event.setEndTimestamp(new Date(now.getTime() + 2000*60*60*24));
         return event;
     }
 

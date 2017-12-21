@@ -64,12 +64,21 @@ public class BaseDao {
         return ofy().load().type(UserEntity.class).filter("email", email).first().now();
     }
 
-    public List<EventEntity> loadEventsByEventType(CatalogEntity eventType, Date serverTimestamp) {
+    public List<EventEntity> loadNonCompletedEvents(CatalogEntity eventType, Date serverTimestamp) {
         return ofy()
                 .load()
                 .type(EventEntity.class)
                 .filter("eventType", Ref.create(eventType))
                 .filter("endTimestamp >", serverTimestamp)
+                .list();
+    }
+
+    public List<EventEntity> loadCompletedEvents(CatalogEntity eventType, Date serverTimestamp) {
+        return ofy()
+                .load()
+                .type(EventEntity.class)
+                .filter("eventType", Ref.create(eventType))
+                .filter("endTimestamp <=", serverTimestamp)
                 .list();
     }
 
