@@ -5,13 +5,13 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class WebpageView extends Composite {
-	private static WebpageViewUiBinder uiBinder = GWT.create(WebpageViewUiBinder.class);
+public class InfoCard extends Composite {
+	private static InfoCardUiBinder uiBinder = GWT.create(InfoCardUiBinder.class);
 
-	interface WebpageViewUiBinder extends UiBinder<Widget, WebpageView> {
+	interface InfoCardUiBinder extends UiBinder<Widget, InfoCard> {
 	}
 
-	public WebpageView() {
+	public InfoCard() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 }

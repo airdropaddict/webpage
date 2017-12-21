@@ -1,34 +1,65 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:m="urn:import:gwt.material.design.client.ui">
-	<ui:style>
-	</ui:style>
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:m="urn:import:gwt.material.design.client.ui"
+	xmlns:my="urn:import:com.airdropaddict.webpage.client.ui">
 
 	<g:HTMLPanel>
 		<m:MaterialPanel>
 			<m:MaterialHeader layoutPosition="FIXED" width="100%"
-				shadow="1" depth="996">
+				shadow="1" depth="996" backgroundColor="LIGHT_BLUE">
 				<m:MaterialNavBar backgroundColor="LIGHT_BLUE"
 					activates="sidenavGplus">
 					<m:MaterialNavSection paddingLeft="30"
-						paddingRight="0">
+						paddingRight="0" paddingTop="10" paddingBottom="0">
 						<m:MaterialImage url="./images/logo.png" />
 					</m:MaterialNavSection>
-					<m:MaterialNavBrand paddingLeft="10" text="AirdropAddict"
+					<m:MaterialNavBrand paddingLeft="15" text="AirdropAddict"
 						fontSize="3.0em" fontWeight="BOLD" />
 					<m:MaterialNavSection float="RIGHT">
 						<m:MaterialLink iconType="APPS" />
 					</m:MaterialNavSection>
 				</m:MaterialNavBar>
+
+				<m:MaterialRow backgroundColor="LIGHT_BLUE"
+					marginBottom="0" marginTop="0">
+					<m:MaterialColumn offset="l3 m0 s0" grid="l6 m12 s12"
+						backgroundColor="LIGHT_BLUE">
+						<m:MaterialTab ui:field="tab" backgroundColor="LIGHT_BLUE"
+							fontWeight="BOLD">
+							<m:MaterialTabItem>
+								<m:MaterialLink text="Daly Airdrops" textColor="WHITE"
+									waves="DEFAULT" />
+							</m:MaterialTabItem>
+							<m:MaterialTabItem>
+								<m:MaterialLink text="Untrusted Airdrops"
+									textColor="WHITE" waves="DEFAULT" />
+							</m:MaterialTabItem>
+							<m:MaterialTabItem>
+								<m:MaterialLink text="Tutorial" textColor="WHITE"
+									waves="DEFAULT" />
+							</m:MaterialTabItem>
+						</m:MaterialTab>
+					</m:MaterialColumn>
+				</m:MaterialRow>
 			</m:MaterialHeader>
 
-			<m:MaterialContainer paddingLeft="250"
-				paddingRight="180" paddingTop="140" ui:field="content">
+			<m:MaterialContainer paddingTop="120"
+				paddingLeft="130" paddingRight="130">
+				<m:MaterialRow>
+					<m:MaterialColumn grid="s12 m12 l9" border="0">
+						<my:AirdropsContainer>
+						</my:AirdropsContainer>
+					</m:MaterialColumn>
+					<m:MaterialColumn grid="s12 m12 l3" border="0">
+						<my:InfosContainer>
+						</my:InfosContainer>
+					</m:MaterialColumn>
+				</m:MaterialRow>
 			</m:MaterialContainer>
 
-			<m:MaterialFooter type="FIXED">
+			<m:MaterialFooter type="FIXED" depth="996">
 				<m:MaterialFooterCopyright
-					backgroundColor="LIGHT_BLUE" addStyleNames="customFooter">
+					backgroundColor="LIGHT_BLUE">
 					<m:MaterialLabel text="© Copyright AirdropAddict" />
 				</m:MaterialFooterCopyright>
 			</m:MaterialFooter>
