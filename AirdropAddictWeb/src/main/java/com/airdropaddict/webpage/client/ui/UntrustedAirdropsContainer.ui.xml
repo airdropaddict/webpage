@@ -1,11 +1,12 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:m="urn:import:gwt.material.design.client.ui"
-	xmlns:my="urn:import:com.airdropaddict.webpage.client.ui">
+	xmlns:my="urn:import:com.airdropaddict.webpage.client.ui" xmlns:mt="urn:import:gwt.material.design.client.ui.table">
 	<g:HTMLPanel>
 		<m:MaterialContainer>
-			<m:MaterialRow ui:field="content">
-			</m:MaterialRow>
+			<!-- <mt:MaterialDataTable shadow="1" marginTop="20"
+				ui:field="table" height="100%" useStickyHeader="true" useCategories="false"
+				useRowExpansion="true" selectionType="NONE" /> -->
 			<my:NavigationContainer>
 			</my:NavigationContainer>
 		</m:MaterialContainer>
