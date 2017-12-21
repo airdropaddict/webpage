@@ -26,15 +26,15 @@
 						backgroundColor="LIGHT_BLUE">
 						<m:MaterialTab ui:field="tab" backgroundColor="LIGHT_BLUE"
 							fontWeight="BOLD">
-							<m:MaterialTabItem>
+							<m:MaterialTabItem ui:field="airdropsTab">
 								<m:MaterialLink text="Daly Airdrops" textColor="WHITE"
 									waves="DEFAULT" />
 							</m:MaterialTabItem>
-							<m:MaterialTabItem>
+							<m:MaterialTabItem ui:field="untrustedTab">
 								<m:MaterialLink text="Untrusted Airdrops"
 									textColor="WHITE" waves="DEFAULT" />
 							</m:MaterialTabItem>
-							<m:MaterialTabItem>
+							<m:MaterialTabItem ui:field="tutorialTab">
 								<m:MaterialLink text="Tutorial" textColor="WHITE"
 									waves="DEFAULT" />
 							</m:MaterialTabItem>
@@ -46,8 +46,9 @@
 			<m:MaterialContainer paddingTop="120"
 				paddingLeft="130" paddingRight="130">
 				<m:MaterialRow>
-					<m:MaterialColumn grid="s12 m12 l9" border="0">
-						<my:AirdropsContainer>
+					<m:MaterialColumn grid="s12 m12 l9" border="0"
+						ui:field="content">
+						<my:AirdropsContainer ui:field="airdrops">
 						</my:AirdropsContainer>
 					</m:MaterialColumn>
 					<m:MaterialColumn grid="s12 m12 l3" border="0">

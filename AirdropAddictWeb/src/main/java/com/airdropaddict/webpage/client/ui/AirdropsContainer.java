@@ -2,6 +2,8 @@ package com.airdropaddict.webpage.client.ui;
 
 import static java.util.stream.IntStream.range;
 
+import com.airdropaddict.webpage.client.EventService;
+import com.airdropaddict.webpage.client.EventServiceAsync;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -15,6 +17,8 @@ public class AirdropsContainer extends Composite {
 
 	interface AirdropsContainerUiBinder extends UiBinder<Widget, AirdropsContainer> {
 	}
+
+	private final EventServiceAsync eventService = GWT.create(EventService.class);
 
 	@UiField
 	MaterialRow content;
