@@ -1,24 +1,34 @@
 package com.airdropaddict.webpage.server;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Date;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.airdropaddict.webpage.client.EventService;
 import com.airdropaddict.webpage.server.entity.CatalogEntity;
 import com.airdropaddict.webpage.server.entity.EventEntity;
 import com.airdropaddict.webpage.server.entity.UserEntity;
 import com.airdropaddict.webpage.shared.EventResultType;
-import com.airdropaddict.webpage.shared.data.*;
+import com.airdropaddict.webpage.shared.data.AccessData;
+import com.airdropaddict.webpage.shared.data.CatalogData;
+import com.airdropaddict.webpage.shared.data.CatalogType;
+import com.airdropaddict.webpage.shared.data.EventData;
+import com.airdropaddict.webpage.shared.data.PageData;
+import com.airdropaddict.webpage.shared.data.UserData;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.Closeable;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.awt.*;
-import java.util.Date;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class EventServiceTest {
     private final LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
@@ -204,7 +214,6 @@ public class EventServiceTest {
     public void deleteEvent()
     {
         AccessData accessData = prepareAnonymousAccessData();
-        CatalogData airdropEventType = fetchAirdropEventType();
         EventData event = prepareTestEvent();
         long id = eventService.saveEvent(event);
         assertTrue("Nonzero id should be returned", id != 0);
