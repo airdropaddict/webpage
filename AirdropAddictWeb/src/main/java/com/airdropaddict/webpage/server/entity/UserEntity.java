@@ -16,11 +16,4 @@ public class UserEntity extends BasicEntity {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public UserData toData() {
-        UserData user = new UserData();
-        user.setId(getId());
-        user.setEmail(email);
-        return user;
-    }
 }

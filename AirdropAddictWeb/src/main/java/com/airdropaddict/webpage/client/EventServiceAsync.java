@@ -10,6 +10,10 @@ public interface EventServiceAsync {
     void loadCatalogByType(CatalogType catalogType, AsyncCallback<List<CatalogData>> callback) throws IllegalArgumentException;
     void getCatalogByTypeAndCode(CatalogType catalogType, String code, AsyncCallback<CatalogData> callback) throws IllegalArgumentException;
 
+    void getTaskTemplates(AsyncCallback<List<TaskTemplateData>> callback) throws IllegalArgumentException;
+    void saveTaskTemplate(TaskTemplateData taskTemplate, AsyncCallback<Void> callback) throws IllegalArgumentException;
+    void deleteTaskTemplate(long taskTemplateId, AsyncCallback<Void> callback) throws IllegalArgumentException;
+
     void getUserByEmail(String email, AsyncCallback<UserData> callback) throws IllegalArgumentException;
     void saveUser(UserData user, AsyncCallback<Long> callback) throws IllegalArgumentException;
 

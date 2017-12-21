@@ -45,6 +45,10 @@ public class BaseDao {
         return ObjectifyService.ofy().load().type(entityClass).filterKey(Key.create(entityClass, id)).first().now();
     }
 
+    public <T extends BasicEntity> List<T> loadAll(Class<T> entityClass) {
+        return ObjectifyService.ofy().load().type(entityClass).list();
+    }
+
     public void save(BasicEntity entity)
     {
         ObjectifyService.ofy().save().entity(entity).now();

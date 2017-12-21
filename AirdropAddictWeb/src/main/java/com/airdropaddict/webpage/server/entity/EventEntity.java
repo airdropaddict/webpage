@@ -105,22 +105,6 @@ public class EventEntity extends BasicEntity {
         this.rateHistory = rateHistory;
     }
 
-    public EventData toData(AccessData access) {
-        EventData eventData = new EventData();
-        eventData.setId(id);
-        eventData.setName(name);
-        eventData.setEventType(this.eventType.get().toData());
-        eventData.setUrl(url);
-        eventData.setImageUrl(imageUrl);
-        eventData.setDescription(description);
-        eventData.setStartTimestamp(startTimestamp);
-        eventData.setEndTimestamp(endTimestamp);
-        eventData.setTasks(tasks);
-        eventData.setRating(rating);
-        eventData.setRateStatus(calculateRateInfo(access));
-        return eventData;
-    }
-
     public boolean canRate(AccessData access) {
         if (access.getUser() != null)
         {
@@ -136,7 +120,7 @@ public class EventEntity extends BasicEntity {
         return true;
     }
 
-    private RateInfoData calculateRateInfo(AccessData access) {
+    public RateInfoData calculateRateInfo(AccessData access) {
         if (access.getUser() != null)
         {
             RateInfo rateInfo = getRateInfoByUserId(access.getUser().getId());
