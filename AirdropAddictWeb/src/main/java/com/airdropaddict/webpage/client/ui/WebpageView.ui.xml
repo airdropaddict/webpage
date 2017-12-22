@@ -8,39 +8,46 @@
 			<m:MaterialHeader layoutPosition="FIXED" width="100%"
 				shadow="1" depth="996" backgroundColor="LIGHT_BLUE">
 				<m:MaterialNavBar backgroundColor="LIGHT_BLUE"
-					activates="sidenavGplus">
+					height="88px">
 					<m:MaterialNavSection paddingLeft="30"
-						paddingRight="0" paddingTop="10" paddingBottom="0">
-						<m:MaterialImage url="./images/logo.png" />
+						paddingRight="0" paddingBottom="0" hideOn="NONE" position="LEFT">
+						<m:MaterialImage url="./images/logoHeader.png"
+							padding="0" paddingTop="10" />
+						<m:MaterialLabel text="AirdropAddict" fontSize="3.0em"
+							fontWeight="BOLD" paddingLeft="10" paddingTop="10" />
 					</m:MaterialNavSection>
-					<m:MaterialNavBrand paddingLeft="15" text="AirdropAddict"
-						fontSize="3.0em" fontWeight="BOLD" />
-					<m:MaterialNavSection float="RIGHT">
-						<m:MaterialLink iconType="APPS" />
+					<m:MaterialNavSection hideOn="HIDE_ON_MED_DOWN"
+						position="RIGHT">
+						<m:MaterialNavContent paddingTop="15">
+							<m:MaterialTab backgroundColor="LIGHT_BLUE"
+								fontWeight="BOLD">
+								<m:MaterialTabItem ui:field="airdropsTab">
+									<m:MaterialLink text="Daly Airdrops" textColor="WHITE"
+										waves="DEFAULT" />
+								</m:MaterialTabItem>
+								<m:MaterialTabItem ui:field="untrustedTab">
+									<m:MaterialLink text="Untrusted Airdrops"
+										textColor="WHITE" waves="DEFAULT" />
+								</m:MaterialTabItem>
+								<m:MaterialTabItem ui:field="tutorialTab">
+									<m:MaterialLink text="Tutorial" textColor="WHITE"
+										waves="DEFAULT" />
+								</m:MaterialTabItem>
+							</m:MaterialTab>
+						</m:MaterialNavContent>
+					</m:MaterialNavSection>
+					<m:MaterialNavSection position="RIGHT" hideOn="HIDE_ON_LARGE">
+						<m:MaterialLink iconType="MENU" activates="dropdown" />
 					</m:MaterialNavSection>
 				</m:MaterialNavBar>
 
-				<m:MaterialRow backgroundColor="LIGHT_BLUE"
-					marginBottom="0" marginTop="0">
-					<m:MaterialColumn offset="l3 m0 s0" grid="l6 m12 s12"
-						backgroundColor="LIGHT_BLUE">
-						<m:MaterialTab ui:field="tab" backgroundColor="LIGHT_BLUE"
-							fontWeight="BOLD">
-							<m:MaterialTabItem ui:field="airdropsTab">
-								<m:MaterialLink text="Daly Airdrops" textColor="WHITE"
-									waves="DEFAULT" />
-							</m:MaterialTabItem>
-							<m:MaterialTabItem ui:field="untrustedTab">
-								<m:MaterialLink text="Untrusted Airdrops"
-									textColor="WHITE" waves="DEFAULT" />
-							</m:MaterialTabItem>
-							<m:MaterialTabItem ui:field="tutorialTab">
-								<m:MaterialLink text="Tutorial" textColor="WHITE"
-									waves="DEFAULT" />
-							</m:MaterialTabItem>
-						</m:MaterialTab>
-					</m:MaterialColumn>
-				</m:MaterialRow>
+				<m:MaterialDropDown activator="dropdown"
+					belowOrigin="false">
+					<m:MaterialLink text="Daly Airdrops" />
+					<m:MaterialLink text="Untrusted Airdrops" />
+					<m:MaterialLink text="Tutorial" />
+				</m:MaterialDropDown>
+
 			</m:MaterialHeader>
 
 			<m:MaterialContainer paddingTop="120"

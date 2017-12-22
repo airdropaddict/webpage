@@ -33,7 +33,7 @@ public class AirdropsContainer extends Composite {
 	public AirdropsContainer() {
 		initWidget(uiBinder.createAndBindUi(this));
 		range(0, 12).forEachOrdered(i -> content.add(new AirdropCard("Airdrop " + i)));
-		findEvents();
+		//findEvents();
 	}
 
 	private void findEvents() {
