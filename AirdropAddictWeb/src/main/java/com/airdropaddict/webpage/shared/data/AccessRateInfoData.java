@@ -2,15 +2,15 @@ package com.airdropaddict.webpage.shared.data;
 
 import java.io.Serializable;
 
-public class RateInfoData implements Serializable {
+public class AccessRateInfoData implements Serializable {
     private int rating;
     private String ip;
     private boolean changeable;
 
-    public RateInfoData() {
+    public AccessRateInfoData() {
     }
 
-    public RateInfoData(int rating, String ip, boolean changeable) {
+    public AccessRateInfoData(int rating, String ip, boolean changeable) {
         this.rating = rating;
         this.ip = ip;
         this.changeable = changeable;

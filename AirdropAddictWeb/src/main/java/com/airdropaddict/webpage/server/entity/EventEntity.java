@@ -1,8 +1,5 @@
 package com.airdropaddict.webpage.server.entity;
 
-import com.airdropaddict.webpage.shared.data.AccessData;
-import com.airdropaddict.webpage.shared.data.EventData;
-import com.airdropaddict.webpage.shared.data.RateInfoData;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
@@ -23,7 +20,9 @@ public class EventEntity extends BasicEntity {
     private Date endTimestamp;
     private Map<String, String> tasks = new HashMap<>();
     private float rating;
-    private List<RateInfo> rateHistory = new LinkedList<>();
+    private long numberOfRates;
+    @Index
+    private boolean scam;
 
     public String getName() {
         return name;
@@ -97,59 +96,67 @@ public class EventEntity extends BasicEntity {
         this.rating = rating;
     }
 
-    public List<RateInfo> getRateHistory() {
-        return rateHistory;
+    public boolean isScam() {
+        return scam;
     }
 
-    public void setRateHistory(List<RateInfo> rateHistory) {
-        this.rateHistory = rateHistory;
+    public long getNumberOfRates() {
+        return numberOfRates;
     }
 
-    public boolean canRate(AccessData access) {
-        if (access.getUser() != null)
-        {
-            return true;
-        }
-        if (access.getIp() != null) {
-            RateInfo rateInfo = getRateInfoByIp(access.getIp());
-            if (rateInfo != null)
-            {
-                return false;
-            }
-        }
-        return true;
+    public void setNumberOfRates(long numberOfRates) {
+        this.numberOfRates = numberOfRates;
     }
 
-    public RateInfoData calculateRateInfo(AccessData access) {
-        if (access.getUser() != null)
-        {
-            RateInfo rateInfo = getRateInfoByUserId(access.getUser().getId());
-            if (rateInfo != null)
-            {
-                return new RateInfoData(rateInfo.getRating(), rateInfo.getIp(), true);
-            }
-        }
-        if (access.getIp() != null) {
-            RateInfo rateInfo = getRateInfoByIp(access.getIp());
-            if (rateInfo != null)
-            {
-                return new RateInfoData(rateInfo.getRating(), rateInfo.getIp(), access.getUser() != null);
-            }
-        }
-        return null;
+    public void setScam(boolean scam) {
+        this.scam = scam;
     }
 
-    private RateInfo getRateInfoByUserId(long userId) {
-        return rateHistory.stream()
-                .filter(r -> r.getUser() != null && r.getUser().get().getId() == userId)
-                .findFirst()
-                .orElse(null);
-    }
+//    public boolean canRate(AccessData access) {
+//        if (access.getUser() != null)
+//        {
+//            return true;
+//        }
+//        if (access.getIp() != null) {
+//            RateInfo rateInfo = getRateInfoByIp(access.getIp());
+//            if (rateInfo != null)
+//            {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+//
+//    public AccessRateInfoData calculateRateInfo(AccessData access) {
+//        if (access.getUser() != null)
+//        {
+//            RateInfo rateInfo = getRateInfoByUserId(access.getUser().getId());
+//            if (rateInfo != null)
+//            {
+//                return new AccessRateInfoData(rateInfo.getRating(), rateInfo.getIp(), true);
+//            }
+//        }
+//        if (access.getIp() != null) {
+//            RateInfo rateInfo = getRateInfoByIp(access.getIp());
+//            if (rateInfo != null)
+//            {
+//                return new AccessRateInfoData(rateInfo.getRating(), rateInfo.getIp(), access.getUser() != null);
+//            }
+//        }
+//        return null;
+//    }
 
-    private RateInfo getRateInfoByIp(String ip) {
-        return rateHistory.stream()
-                .filter(r -> ip.equals(r.getIp()))
-                .findFirst()
-                .orElse(null);
-    }
+//    private RateInfo getRateInfoByUserId(long userId) {
+//        return rateHistory.stream()
+//                .filter(r -> r.getUser() != null && r.getUser().get().getId() == userId)
+//                .findFirst()
+//                .orElse(null);
+//    }
+//
+//    private RateInfo getRateInfoByIp(String ip) {
+//        return rateHistory.stream()
+//                .filter(r -> ip.equals(r.getIp()))
+//                .findFirst()
+//                .orElse(null);
+//    }
 }

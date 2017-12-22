@@ -23,6 +23,6 @@ public interface EventServiceAsync {
     void updateEvent(EventData event, AsyncCallback<Void> callback);
     void deleteEvent(long id, AsyncCallback<Void> callback);
     void getActiveEvents(String eventTypeCode, AccessData access, AsyncCallback<List<EventData>> callback);
-    void findEvents(String eventTypeCode, EventResultType resultType, int resultsPerPage, int page, AccessData access, AsyncCallback<PageData<EventData>> callback);
+    void getSimplePageableEvents(String eventTypeCode, EventResultType resultType, boolean scam, int resultsPerPage, int page, AccessData access, AsyncCallback<PageData<SimpleEventData>> callback);
     void rateEvent(long eventId, int rating, AccessData access, AsyncCallback<EventData> callback);
 }

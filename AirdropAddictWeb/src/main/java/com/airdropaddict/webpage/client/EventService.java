@@ -26,6 +26,6 @@ public interface EventService extends RemoteService
     void updateEvent(EventData event);
     void deleteEvent(long id);
     List<EventData> getActiveEvents(String eventTypeCode, AccessData access);
-    PageData<EventData> findEvents(String eventTypeCode, EventResultType resultType, int resultsPerPage, int page, AccessData access);
+    PageData<SimpleEventData> getSimplePageableEvents(String eventTypeCode, EventResultType resultType, boolean scam, int resultsPerPage, int page, AccessData access);
     EventData rateEvent(long eventId, int rating, AccessData access);
 }

@@ -22,6 +22,8 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
                 .list();
         boolean appended = addToCatalogIfNotExists(catalog, CatalogType.CATALOG_TYPE, "EVT", "Event Type");
         appended |= addToCatalogIfNotExists(catalog, CatalogType.EVENT_TYPE, "AIR", "Airdrop");
+        appended |= addToCatalogIfNotExists(catalog, CatalogType.EVENT_VOTE_TYPE, "RAT", "Rate");
+        appended |= addToCatalogIfNotExists(catalog, CatalogType.EVENT_VOTE_TYPE, "SCM", "Scam");
         UserEntity user = new UserEntity();
         user.setEmail("info@airdropaddict.com");
         BaseDao.getInstance().save(user);
@@ -120,7 +122,7 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
             CatalogEntity eventType = BaseDao.getInstance().getCatalogByTypeAndCode(CatalogType.EVENT_TYPE, eventTypeCode);
             Date serverTimestamp = new Date();
             // Get events filtered by endTimestamp
-            List<EventEntity> events = BaseDao.getInstance().loadNonCompletedEvents(eventType, serverTimestamp);
+            List<EventEntity> events = BaseDao.getInstance().loadNonCompletedEvents(eventType, false, serverTimestamp);
             // Filter in memory by startTimestamp
             return events.stream()
                     .filter(e -> e.getStartTimestamp().before(serverTimestamp))
@@ -133,8 +135,8 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
     }
 
     @Override
-    public PageData<EventData> findEvents(String eventTypeCode, EventResultType resultType, int resultsPerPage, int page, AccessData access) {
-        List<EventData> results;
+    public PageData<SimpleEventData> getSimplePageableEvents(String eventTypeCode, EventResultType resultType, boolean scam, int resultsPerPage, int page, AccessData access) {
+        List<SimpleEventData> results;
         try {
             CatalogEntity eventType = BaseDao.getInstance().getCatalogByTypeAndCode(CatalogType.EVENT_TYPE, eventTypeCode);
             Date serverTimestamp = new Date();
@@ -143,23 +145,23 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
             List<EventEntity> events;
             if (resultType == EventResultType.EXPIRED) {
                 // Get events filtered by endTimestamp
-                events = BaseDao.getInstance().loadCompletedEvents(eventType, serverTimestamp);
+                events = BaseDao.getInstance().loadCompletedEvents(eventType, scam, serverTimestamp);
                 results = events.stream()
                         .skip(startIndex)
                         .limit(resultsPerPage+1)
-                        .map(e -> new EventConverter(access).apply(e))
+                        .map(new SimpleEventConverter())
                         .collect(Collectors.toList());
             }
             else {
                 // Get events filtered by endTimestamp
-                events = BaseDao.getInstance().loadNonCompletedEvents(eventType, serverTimestamp);
+                events = BaseDao.getInstance().loadNonCompletedEvents(eventType, scam, serverTimestamp);
                 if (resultType == EventResultType.ACTIVE) {
                     // Filter in memory by startTimestamp and do paging
                     results = events.stream()
                         .filter(e -> e.getStartTimestamp().before(serverTimestamp))
                         .skip(startIndex)
                         .limit(resultsPerPage+1)
-                        .map(e -> new EventConverter(access).apply(e))
+                        .map(new SimpleEventConverter())
                         .collect(Collectors.toList());
                 }
                 else { // EventResultType.WAITING_FOR_ACTIVATION
@@ -168,7 +170,7 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
                         .filter(e -> e.getStartTimestamp().after(serverTimestamp))
                         .skip(startIndex)
                         .limit(resultsPerPage+1)
-                        .map(e -> new EventConverter(access).apply(e))
+                        .map(new SimpleEventConverter())
                         .collect(Collectors.toList());
                 }
             }
@@ -188,40 +190,42 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
     @Override
     public EventData rateEvent(long eventId, int rating, AccessData access)  {
         EventEntity event = BaseDao.getInstance().load(EventEntity.class, eventId);
-        if (event.canRate(access))
-        {
-            boolean insert = false;
-            RateInfo rateInfo = null;
-            if (access.getUser() != null) {
-                // Find rate by user
-                rateInfo = event.getRateHistory().stream()
-                        .filter(r -> r.getUser() != null && access.getUser().getId() == r.getUser().get().getId())
-                        .findFirst().orElse(null);
-                if (rateInfo == null) {
-                    // Find rate by IP
-                    rateInfo = event.getRateHistory().stream()
-                            .filter(r -> access.getIp() == r.getIp())
-                            .findFirst().orElse(null);
-                }
-            }
-            // No rate found - create new
-            if (rateInfo == null) {
-                rateInfo = new RateInfo();
-                insert = true;
-            }
-            // Set user if unset and userinfo is present
-            if (rateInfo.getUser() == null && access.getUser() != null) {
-                UserEntity user = BaseDao.getInstance().load(UserEntity.class, access.getUser().getId());
-                rateInfo.setUser(Ref.create(user));
-            }
-            rateInfo.setRating(rating);
-            rateInfo.setIp(access.getIp());
-            if (insert) {
-                event.getRateHistory().add(rateInfo);
-            }
+        CatalogEntity ratingVoteType = BaseDao.getInstance().getCatalogByTypeAndCode(CatalogType.EVENT_VOTE_TYPE, "RAT");
+        UserEntity user = null;
+        if (access.getUser() != null && access.getUser().getId() != 0) {
+            user = BaseDao.getInstance().load(UserEntity.class, access.getUser().getId());
         }
-        event.setRating((float)event.getRateHistory().stream().mapToInt(RateInfo::getRating).average().getAsDouble());
-        BaseDao.getInstance().save(event);
+
+        EventVoteEntity vote = BaseDao.getInstance().findUserVotes(event, ratingVoteType, user, access.getIp()).stream().findFirst().orElse(null);
+        if (canRate(vote, access))
+        {
+            boolean newVote = false;
+            if (vote == null)
+            {
+                newVote = true;
+                vote = new EventVoteEntity();
+                vote.setEvent(Ref.create(event));
+                vote.setVoteType(Ref.create(ratingVoteType));
+            }
+            if (access.getUser() != null && vote.getUser() == null) {
+                vote.setUser(Ref.create(user));
+            }
+            vote.setIp(access.getIp());
+            vote.setValue(rating);
+            BaseDao.getInstance().save(vote);
+
+            if (!newVote || (event.getNumberOfRates() + 1 % 10) == 0) {
+                List<EventVoteEntity> votes = BaseDao.getInstance().findVotes(event, ratingVoteType);
+                event.setRating((float) votes.stream().mapToInt(EventVoteEntity::getVote).average().getAsDouble());
+                event.setNumberOfRates(votes.size());
+            } else {
+                float newRating = (event.getRating() * event.getNumberOfRates() + rating) / (event.getNumberOfRates() + 1);
+                event.setRating(newRating);
+                event.setNumberOfRates(event.getNumberOfRates() + 1);
+            }
+
+            BaseDao.getInstance().save(event);
+        }
         return new EventConverter(access).apply(event);
     }
 
@@ -245,5 +249,18 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
     private CatalogEntity findCatalogEntry(List<CatalogEntity> catalog, CatalogType catalogType, String code)
     {
         return catalog.stream().filter(c -> catalogType.equals(c.getCatalogType()) && code.equals(c.getCode())).findFirst().orElse(null);
+    }
+
+    private static boolean canRate(EventVoteEntity vote, AccessData access)
+    {
+        if (access.getUser() != null)
+        {
+            return true;
+        }
+        if (access.getIp() != null) {
+
+            return vote == null;
+        }
+        return true;
     }
 }

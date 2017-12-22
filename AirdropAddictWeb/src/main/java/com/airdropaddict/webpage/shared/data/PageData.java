@@ -1,8 +1,9 @@
 package com.airdropaddict.webpage.shared.data;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PageData<T> {
+public class PageData<T> implements Serializable {
 	private List<T> items;
 	private boolean lastPage;
 

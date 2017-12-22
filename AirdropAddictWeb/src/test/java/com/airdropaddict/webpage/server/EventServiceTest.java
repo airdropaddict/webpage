@@ -2,8 +2,7 @@ package com.airdropaddict.webpage.server;
 
 import com.airdropaddict.webpage.client.EventService;
 import com.airdropaddict.webpage.server.entity.CatalogEntity;
-import com.airdropaddict.webpage.server.entity.EventEntity;
-import com.airdropaddict.webpage.server.entity.UserEntity;
+import com.airdropaddict.webpage.server.listener.OfyListener;
 import com.airdropaddict.webpage.shared.EventResultType;
 import com.airdropaddict.webpage.shared.data.*;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
@@ -14,36 +13,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
 import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class EventServiceTest {
-    private final LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
-    private Closeable closeable;
-    private EventService eventService;
-    private int eventCounter;
-    private UserData defaultUser;
-
-    @Before
-    public void setUp() {
-        helper.setUp();
-        closeable = ObjectifyService.begin();
-        ObjectifyService.register(CatalogEntity.class);
-        ObjectifyService.register(UserEntity.class);
-        ObjectifyService.register(EventEntity.class);
-        eventService = new EventServiceImpl();
-        eventService.initializeCatalogs();
-        defaultUser = eventService.getUserByEmail("info@airdropaddict.com");
-    }
-
-    @After
-    public void tearDown() {
-        closeable.close();
-        helper.tearDown();
-    }
+public class EventServiceTest extends SimpleTestFrame {
 
     @Test
     public void initializeCatalogs() {
@@ -51,6 +26,10 @@ public class EventServiceTest {
         assertNotNull("Event catalog entry is missing", eventCatalogEntry);
         CatalogEntity airdropCatalogEntry = BaseDao.getInstance().getCatalogByTypeAndCode(CatalogType.EVENT_TYPE, "AIR");
         assertNotNull("Airdrop catalog entry is missing", airdropCatalogEntry);
+        CatalogEntity rateCatalogEntry = BaseDao.getInstance().getCatalogByTypeAndCode(CatalogType.EVENT_VOTE_TYPE, "RAT");
+        assertNotNull("Rate catalog entry is missing", rateCatalogEntry);
+        CatalogEntity scamCatalogEntry = BaseDao.getInstance().getCatalogByTypeAndCode(CatalogType.EVENT_VOTE_TYPE, "SCM");
+        assertNotNull("Scam catalog entry is missing", rateCatalogEntry);
     }
 
     @Test
@@ -98,19 +77,19 @@ public class EventServiceTest {
         eventService.saveEvent(prepareTestEvent());
         eventService.saveEvent(prepareTestEvent());
         eventService.saveEvent(prepareTestEvent());
-        PageData<EventData> pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 0, accessData);
+        PageData<SimpleEventData> pageInfo = eventService.getSimplePageableEvents(airdropEventType.getCode(), EventResultType.ACTIVE, false, 3, 0, accessData);
         assertEquals("Invalid result size", 3, pageInfo.getItems().size());
         assertFalse("Should not be last page", pageInfo.isLastPage());
-        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 1, accessData);
+        pageInfo = eventService.getSimplePageableEvents(airdropEventType.getCode(), EventResultType.ACTIVE, false, 3, 1, accessData);
         assertEquals("Invalid result size", 2, pageInfo.getItems().size());
         assertTrue("Should be last page", pageInfo.isLastPage());
-        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 2, accessData);
+        pageInfo = eventService.getSimplePageableEvents(airdropEventType.getCode(), EventResultType.ACTIVE, false, 3, 2, accessData);
         assertEquals("Invalid result size", 0, pageInfo.getItems().size());
         assertTrue("Should be last page", pageInfo.isLastPage());
-        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 0, accessData);
+        pageInfo = eventService.getSimplePageableEvents(airdropEventType.getCode(), EventResultType.ACTIVE, false, 10, 0, accessData);
         assertEquals("Invalid result size", 5, pageInfo.getItems().size());
         assertTrue("Should be last page", pageInfo.isLastPage());
-        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 99999, accessData);
+        pageInfo = eventService.getSimplePageableEvents(airdropEventType.getCode(), EventResultType.ACTIVE, false, 10, 99999, accessData);
         assertEquals("Invalid result size", 0, pageInfo.getItems().size());
         assertTrue("Should be last page", pageInfo.isLastPage());
     }
@@ -129,28 +108,28 @@ public class EventServiceTest {
         eventService.saveEvent(prepareFutureEvent());
         eventService.saveEvent(prepareFutureEvent());
         eventService.saveEvent(prepareFutureEvent());
-        PageData<EventData> pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 0, accessData);
+        PageData<SimpleEventData> pageInfo = eventService.getSimplePageableEvents(airdropEventType.getCode(), EventResultType.ACTIVE, false, 3, 0, accessData);
         assertEquals("Invalid result size", 3, pageInfo.getItems().size());
         assertFalse("Should not be last page", pageInfo.isLastPage());
-        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 1, accessData);
+        pageInfo = eventService.getSimplePageableEvents(airdropEventType.getCode(), EventResultType.ACTIVE, false, 3, 1, accessData);
         assertEquals("Invalid result size", 2, pageInfo.getItems().size());
         assertTrue("Should be last page", pageInfo.isLastPage());
-        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 3, 2, accessData);
+        pageInfo = eventService.getSimplePageableEvents(airdropEventType.getCode(), EventResultType.ACTIVE, false, 3, 2, accessData);
         assertEquals("Invalid result size", 0, pageInfo.getItems().size());
         assertTrue("Should be last page", pageInfo.isLastPage());
-        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 0, accessData);
+        pageInfo = eventService.getSimplePageableEvents(airdropEventType.getCode(), EventResultType.ACTIVE, false, 10, 0, accessData);
         assertEquals("Invalid result size", 5, pageInfo.getItems().size());
         assertTrue("Should be last page", pageInfo.isLastPage());
-        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.ACTIVE, 10, 99999, accessData);
+        pageInfo = eventService.getSimplePageableEvents(airdropEventType.getCode(), EventResultType.ACTIVE, false, 10, 99999, accessData);
         assertEquals("Invalid result size", 0, pageInfo.getItems().size());
         assertTrue("Should be last page", pageInfo.isLastPage());
-        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.EXPIRED, 2, 0, accessData);
+        pageInfo = eventService.getSimplePageableEvents(airdropEventType.getCode(), EventResultType.EXPIRED, false, 2, 0, accessData);
         assertEquals("Invalid result size", 2, pageInfo.getItems().size());
         assertTrue("Should be last page", pageInfo.isLastPage());
-        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.FUTURE, 2, 0, accessData);
+        pageInfo = eventService.getSimplePageableEvents(airdropEventType.getCode(), EventResultType.FUTURE, false, 2, 0, accessData);
         assertEquals("Invalid result size", 2, pageInfo.getItems().size());
         assertFalse("Should not be last page", pageInfo.isLastPage());
-        pageInfo = eventService.findEvents(airdropEventType.getCode(), EventResultType.FUTURE, 2, 1, accessData);
+        pageInfo = eventService.getSimplePageableEvents(airdropEventType.getCode(), EventResultType.FUTURE, false, 2, 1, accessData);
         assertEquals("Invalid result size", 1, pageInfo.getItems().size());
         assertTrue("Should be last page", pageInfo.isLastPage());
     }
@@ -218,11 +197,13 @@ public class EventServiceTest {
     public void rateEvent()
     {
         AccessData accessData = prepareAnonymousAccessData();
+        String ipA = accessData.getIp();
         EventData event = prepareTestEvent();
         long id = eventService.saveEvent(event);
         assertTrue("Nonzero id should be returned", id != 0);
         // A Rates 4
         EventData updatedEvent = eventService.rateEvent(id, 4, accessData);
+        assertEquals("Invalid number of rates", 1, updatedEvent.getNumberOfRates());
         assertTrue("Rating has invalid value", updatedEvent.getRating() == 4);
         assertNotNull("Rating status is missing", updatedEvent.getRateStatus());
         assertEquals("Rating status rating has invalid value", 4, updatedEvent.getRateStatus().getRating());
@@ -231,6 +212,7 @@ public class EventServiceTest {
 
         // A rates 2 -> forbidden
         updatedEvent = eventService.rateEvent(id, 2, accessData);
+        assertEquals("Invalid number of rates", 1, updatedEvent.getNumberOfRates());
         assertTrue("Rating has invalid value", updatedEvent.getRating() == 4);
         assertNotNull("Rating status is missing", updatedEvent.getRateStatus());
         assertEquals("Rating status rating has invalid value", 4, updatedEvent.getRateStatus().getRating());
@@ -238,8 +220,10 @@ public class EventServiceTest {
         assertFalse("Rating status should not be changeable", updatedEvent.getRateStatus().isChangeable());
 
         // B rates 2 -> OK, rating = 3
-        accessData.setIp("192.168.66.1");
+        accessData = prepareAnonymousAccessData();
+        String ipB = accessData.getIp();
         updatedEvent = eventService.rateEvent(id, 2, accessData);
+        assertEquals("Invalid number of rates", 2, updatedEvent.getNumberOfRates());
         assertTrue("Rating has invalid value", updatedEvent.getRating() == 3);
         assertNotNull("Rating status is missing", updatedEvent.getRateStatus());
         assertEquals("Rating status rating has invalid value", 2, updatedEvent.getRateStatus().getRating());
@@ -247,17 +231,20 @@ public class EventServiceTest {
         assertFalse("Rating status should not be changeable", updatedEvent.getRateStatus().isChangeable());
 
         // A signs in and rates 2 -> OK, rating = 2
-        accessData = prepareUserAccessData();
+        accessData = prepareUserAccessData(defaultUser);
+        accessData.setIp(ipA);
         updatedEvent = eventService.rateEvent(id, 2, accessData);
+        assertEquals("Invalid number of rates", 2, updatedEvent.getNumberOfRates());
         assertTrue("Rating has invalid value", updatedEvent.getRating() == 2);
         assertNotNull("Rating status is missing", updatedEvent.getRateStatus());
         assertEquals("Rating status rating has invalid value", 2, updatedEvent.getRateStatus().getRating());
         assertEquals("Rating status ip has invalid value", accessData.getIp(), updatedEvent.getRateStatus().getIp());
 
         // A changes IP and rates 4 -> OK, rating = 3
-        accessData.setIp("128.66.1.1");
+        accessData.setIp(ipB);
         updatedEvent = eventService.rateEvent(id, 4, accessData);
         assertTrue("Rating has invalid value", updatedEvent.getRating() == 3);
+        assertEquals("Invalid number of rates", 2, updatedEvent.getNumberOfRates());
         assertNotNull("Rating status is missing", updatedEvent.getRateStatus());
         assertEquals("Rating status rating has invalid value", 4, updatedEvent.getRateStatus().getRating());
         assertEquals("Rating status ip has invalid value", accessData.getIp(), updatedEvent.getRateStatus().getIp());
@@ -328,16 +315,24 @@ public class EventServiceTest {
         return eventService.getCatalogByTypeAndCode(CatalogType.EVENT_TYPE, "AIR");
     }
 
-    private AccessData prepareAnonymousAccessData() {
+    public static AccessData prepareAnonymousAccessData() {
         AccessData accessData = new AccessData();
-        accessData.setIp("127.0.0.1");
+        accessData.setIp(getNextIpAddress());
         return accessData;
     }
 
-    private AccessData prepareUserAccessData() {
+    public static AccessData prepareUserAccessData(UserData user) {
         AccessData accessData = new AccessData();
-        accessData.setIp("127.0.0.1");
-        accessData.setUser(defaultUser);
+        accessData.setIp(getNextIpAddress());
+        accessData.setUser(user);
         return accessData;
+    }
+
+    public static String getNextIpAddress() {
+        return "127." + computeIpSubclass(++ipNumber);
+    }
+
+    public static String computeIpSubclass(int i) {
+        return "" + i/65536 + "." + i/256 + "." + i%256;
     }
 }

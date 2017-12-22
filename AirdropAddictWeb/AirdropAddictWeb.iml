@@ -13,11 +13,6 @@
         </packaging>
       </configuration>
     </facet>
-    <facet type="google-app-engine" name="Google App Engine">
-      <configuration>
-        <sdk-home-path>D:/java/appengine-java-sdk-1.9.59</sdk-home-path>
-      </configuration>
-    </facet>
     <facet type="web" name="Web">
       <configuration>
         <descriptors>
