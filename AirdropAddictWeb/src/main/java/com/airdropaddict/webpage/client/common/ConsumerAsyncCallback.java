@@ -1,14 +1,17 @@
-package com.airdropaddict.webpage.client;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
+package com.airdropaddict.webpage.client.common;
 
 import java.util.function.Consumer;
 
-import static com.ibm.icu.impl.Assert.fail;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ConsumerAsyncCallback<T> implements AsyncCallback<T> {
 	Consumer<Throwable> failureHandler;
 	Consumer<T> successHandler;
+
+	public static <T> ConsumerAsyncCallback<T> callback(Consumer<T> successHandler) {
+		return new ConsumerAsyncCallback<T>(successHandler);
+	}
 
 	public ConsumerAsyncCallback(Consumer<Throwable> failureHandler, Consumer<T> successHandler) {
 		this.failureHandler = failureHandler;
@@ -16,7 +19,7 @@ public class ConsumerAsyncCallback<T> implements AsyncCallback<T> {
 	}
 
 	public ConsumerAsyncCallback(Consumer<T> successHandler) {
-		this(t -> fail("Request failure: " + t.getMessage()), successHandler);
+		this(t -> Window.alert("Request failure: " + t.getMessage()), successHandler);
 	}
 
 	@Override

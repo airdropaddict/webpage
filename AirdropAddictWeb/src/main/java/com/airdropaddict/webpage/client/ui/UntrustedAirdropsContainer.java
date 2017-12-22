@@ -14,5 +14,4 @@ public class UntrustedAirdropsContainer extends Composite {
 	public UntrustedAirdropsContainer() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
-
 }

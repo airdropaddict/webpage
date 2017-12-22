@@ -54,6 +54,11 @@
 				<artifactId>gwt-material-themes</artifactId>
 				<version>${gwtmaterial.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.github.gwtmaterialdesign</groupId>
+				<artifactId>gwt-material-table</artifactId>
+				<version>${gwtmaterial.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>com.gwtplatform</groupId>
@@ -150,6 +155,12 @@
 			<artifactId>gwt-material-themes</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.github.gwtmaterialdesign</groupId>
+			<artifactId>gwt-material-table</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 
 		<dependency>
 			<groupId>com.gwtplatform</groupId>

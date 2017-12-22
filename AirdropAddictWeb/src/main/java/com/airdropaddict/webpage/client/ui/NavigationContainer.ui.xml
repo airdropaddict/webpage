@@ -3,12 +3,12 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:m="urn:import:gwt.material.design.client.ui">
 	<g:HTMLPanel>
 		<m:MaterialRow paddingBottom="50">
-			<m:MaterialColumn grid="s2" offset="s4">
+			<m:MaterialColumn grid="s3" offset="s3">
 				<m:MaterialButton text="Newer" waves="LIGHT"
 					backgroundColor="LIGHT_BLUE" textColor="WHITE" iconType="ARROW_BACK"
 					iconPosition="LEFT" enabled="false" />
 			</m:MaterialColumn>
-			<m:MaterialColumn grid="s2">
+			<m:MaterialColumn grid="s3">
 				<m:MaterialButton text="Older" waves="LIGHT"
 					textColor="WHITE" iconType="ARROW_FORWARD" iconPosition="RIGHT"
 					backgroundColor="LIGHT_BLUE" />
