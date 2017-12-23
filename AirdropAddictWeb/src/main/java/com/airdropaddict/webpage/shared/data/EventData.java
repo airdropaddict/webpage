@@ -1,9 +1,10 @@
 package com.airdropaddict.webpage.shared.data;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class EventData extends SimpleEventData {
-	private Map<String, String> tasks;
+	private Map<String, String> tasks = new HashMap<>();
 	private AccessRateInfoData rateStatus;
 	private long numberOfRates;
 
