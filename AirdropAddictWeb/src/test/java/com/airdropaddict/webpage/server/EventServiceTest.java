@@ -168,7 +168,7 @@ public class EventServiceTest extends SimpleTestFrame {
 
         loadedEvent.setName("Altered " + loadedEvent.getName());
         loadedEvent.setDescription("Altered " + loadedEvent.getDescription());
-        eventService.updateEvent(loadedEvent);
+        eventService.saveEvent(loadedEvent);
 
         events = eventService.getActiveEvents(airdropEventType.getCode(), accessData);
         int secondSize = events.size();
