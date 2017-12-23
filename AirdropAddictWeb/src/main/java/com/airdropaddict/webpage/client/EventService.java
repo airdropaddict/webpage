@@ -15,7 +15,7 @@ public interface EventService extends RemoteService
     CatalogData getCatalogByTypeAndCode(CatalogType catalogType, String code);
 
     List<TaskTemplateData> getTaskTemplates();
-    void saveTaskTemplate(TaskTemplateData taskTemplate);
+    long saveTaskTemplate(TaskTemplateData taskTemplate);
     void deleteTaskTemplate(long taskTemplateId);
 
     UserData getUserByEmail(String email);
@@ -23,7 +23,6 @@ public interface EventService extends RemoteService
 
     EventData getEventById(long id, AccessData access);
     long saveEvent(EventData event);
-    void updateEvent(EventData event);
     void deleteEvent(long id);
     List<EventData> getActiveEvents(String eventTypeCode, AccessData access);
     PageData<SimpleEventData> getSimplePageableEvents(String eventTypeCode, EventResultType resultType, boolean scam, int resultsPerPage, int page, AccessData access);

@@ -49,7 +49,7 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
     }
 
     @Override
-    public void saveTaskTemplate(TaskTemplateData taskTemplate)  {
+    public long saveTaskTemplate(TaskTemplateData taskTemplate)  {
         TaskTemplateEntity taskTemplateEntity;
         if (taskTemplate.getId() != 0) {
             taskTemplateEntity = BaseDao.getInstance().load(TaskTemplateEntity.class, taskTemplate.getId());
@@ -59,6 +59,7 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
         }
         new TaskTemplateUpdater().accept(taskTemplateEntity, taskTemplate);
         BaseDao.getInstance().save(taskTemplateEntity);
+        return taskTemplateEntity.getId();
     }
 
     @Override
@@ -96,19 +97,6 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
         new EventUpdater().accept(eventEntity, event);
         BaseDao.getInstance().save(eventEntity);
         return eventEntity.getId();
-    }
-
-    @Override
-    public void updateEvent(EventData event)  {
-        if (event.getId() == 0) {
-            throw new IllegalArgumentException("Can not update non-persistent object. Id is 0.");
-        }
-        if (Tools.isEmpty(event.getName())) {
-            throw new IllegalArgumentException("Empty event name was given.");
-        }
-        EventEntity eventEntity = BaseDao.getInstance().load(EventEntity.class, event.getId());
-        new EventUpdater().accept(eventEntity, event);
-        BaseDao.getInstance().save(eventEntity);
     }
 
     @Override
