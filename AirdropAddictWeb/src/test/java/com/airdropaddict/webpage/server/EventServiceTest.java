@@ -54,6 +54,7 @@ public class EventServiceTest extends SimpleTestFrame {
         assertTrue("Invalid event is returned (by id)", returnedEvent.getId() == id);
         assertEquals("Event name does not match", event.getName(), returnedEvent.getName());
         assertEquals("Event description does not match", event.getDescription(), returnedEvent.getDescription());
+        assertNotNull("InsertTimestamp should be set", returnedEvent.getInsertTimestamp());
         assertEquals("Event startTimestamp does not match", event.getStartTimestamp(), returnedEvent.getStartTimestamp());
         assertEquals("Event endTimestamp does not match", event.getEndTimestamp(), returnedEvent.getEndTimestamp());
     }
@@ -273,6 +274,26 @@ public class EventServiceTest extends SimpleTestFrame {
         assertEquals("Invalid task value", "TestV@lue111", event.getTasks().get("TEST"));
         assertEquals("Invalid task value", "TestValue2", event.getTasks().get("ANOTHERTEST"));
         assertEquals("Invalid task value", "testValue3", event.getTasks().get("THIRDTEST"));
+    }
+
+    @Test
+    public void sorting() {
+        AccessData accessData = prepareAnonymousAccessData();
+        EventData event1 = prepareTestEvent();
+        event1.setInsertTimestamp(new Date());
+        event1.setId(eventService.saveEvent(event1));
+        EventData event2 = prepareTestEvent();
+        event2.setInsertTimestamp(new Date(event1.getInsertTimestamp().getTime() + 1000));
+        event2.setId(eventService.saveEvent(event2));
+        EventData event3 = prepareTestEvent();
+        event3.setInsertTimestamp(new Date(event2.getInsertTimestamp().getTime() + 1000));
+        event3.setId(eventService.saveEvent(event3));
+        PageData<SimpleEventData> page = eventService.getSimplePageableEvents(
+                event1.getEventType().getCode(), EventResultType.ACTIVE, false, 10, 0, accessData);
+        assertEquals("Event 3 should be first one in results", event3.getId(), page.getItems().get(0).getId());
+        assertEquals("Event 2 should be second one in results", event2.getId(), page.getItems().get(1).getId());
+        assertEquals("Event 1 should be last one in results", event1.getId(), page.getItems().get(2).getId());
+
     }
 
     private EventData prepareTestEvent() {

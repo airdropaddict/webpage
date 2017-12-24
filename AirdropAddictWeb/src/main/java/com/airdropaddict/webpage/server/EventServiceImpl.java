@@ -8,9 +8,11 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Ref;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class EventServiceImpl extends RemoteServiceServlet implements EventService {
 
@@ -134,37 +136,30 @@ public class EventServiceImpl extends RemoteServiceServlet implements EventServi
             if (resultType == EventResultType.EXPIRED) {
                 // Get events filtered by endTimestamp
                 events = BaseDao.getInstance().loadCompletedEvents(eventType, scam, serverTimestamp);
-                results = events.stream()
-                        .skip(startIndex)
-                        .limit(resultsPerPage+1)
-                        .map(new SimpleEventConverter())
-                        .collect(Collectors.toList());
             }
             else {
                 // Get events filtered by endTimestamp
                 events = BaseDao.getInstance().loadNonCompletedEvents(eventType, scam, serverTimestamp);
-                if (resultType == EventResultType.ACTIVE) {
-                    // Filter in memory by startTimestamp and do paging
-                    results = events.stream()
-                        .filter(e -> e.getStartTimestamp().before(serverTimestamp))
-                        .skip(startIndex)
-                        .limit(resultsPerPage+1)
-                        .map(new SimpleEventConverter())
-                        .collect(Collectors.toList());
-                }
-                else { // EventResultType.WAITING_FOR_ACTIVATION
-                    // Filter in memory by startTimestamp and do paging
-                    results = events.stream()
-                        .filter(e -> e.getStartTimestamp().after(serverTimestamp))
-                        .skip(startIndex)
-                        .limit(resultsPerPage+1)
-                        .map(new SimpleEventConverter())
-                        .collect(Collectors.toList());
-                }
             }
+
+            Stream<EventEntity> stream = events.stream();
+            if (resultType == EventResultType.ACTIVE) {
+                // Filter in memory by startTimestamp and do paging
+                stream = stream.filter(e -> e.getStartTimestamp().before(serverTimestamp));
+            }
+            else if (resultType == EventResultType.FUTURE) {
+                stream = stream.filter(e -> e.getStartTimestamp().after(serverTimestamp));
+            }
+
+            results = stream
+                    .sorted(Comparator.comparing(EventEntity::getInsertTimestamp, Comparator.nullsLast(Comparator.reverseOrder())))
+                    .skip(startIndex)
+                    .limit(resultsPerPage+1)
+                    .map(new SimpleEventConverter())
+                    .collect(Collectors.toList());
+
             boolean lastPage = true;
-            if (results.size() > resultsPerPage)
-            {
+            if (results.size() > resultsPerPage) {
                 results.remove(results.size()-1);
                 lastPage = false;
             }

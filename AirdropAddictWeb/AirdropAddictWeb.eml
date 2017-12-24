@@ -64,6 +64,7 @@
 	<lib name="Maven: com.github.gwtmaterialdesign:gwt-material-jquery:2.0" scope="PROVIDED"/>
 	<lib name="Maven: com.github.gwtmaterialdesign:gwt-material-addins:2.0" scope="PROVIDED"/>
 	<lib name="Maven: com.github.gwtmaterialdesign:gwt-material-themes:2.0" scope="PROVIDED"/>
+	<lib name="Maven: com.github.gwtmaterialdesign:gwt-material-table:2.0" scope="PROVIDED"/>
 	<lib name="Maven: com.gwtplatform:gwtp-mvp-client:1.5.3" scope="PROVIDED"/>
 	<lib name="Maven: com.gwtplatform:gwtp-clients-common:1.5.3" scope="PROVIDED"/>
 	<lib name="Maven: com.gwtplatform:gwtp-mvp-shared:1.5.3" scope="PROVIDED"/>
@@ -145,6 +146,7 @@
 		<level name="Maven: com.github.gwtmaterialdesign:gwt-material-jquery:2.0" value="project"/>
 		<level name="Maven: com.github.gwtmaterialdesign:gwt-material-addins:2.0" value="project"/>
 		<level name="Maven: com.github.gwtmaterialdesign:gwt-material-themes:2.0" value="project"/>
+		<level name="Maven: com.github.gwtmaterialdesign:gwt-material-table:2.0" value="project"/>
 		<level name="Maven: com.gwtplatform:gwtp-mvp-client:1.5.3" value="project"/>
 		<level name="Maven: com.gwtplatform:gwtp-clients-common:1.5.3" value="project"/>
 		<level name="Maven: com.gwtplatform:gwtp-mvp-shared:1.5.3" value="project"/>

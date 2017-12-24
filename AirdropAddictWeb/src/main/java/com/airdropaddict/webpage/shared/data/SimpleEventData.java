@@ -8,6 +8,7 @@ public class SimpleEventData extends EntityData {
     private String url;
     private String imageUrl;
     private String description;
+    private Date insertTimestamp;
     private Date startTimestamp;
     private Date endTimestamp;
     private double rating;
@@ -51,6 +52,14 @@ public class SimpleEventData extends EntityData {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date getInsertTimestamp() {
+        return insertTimestamp;
+    }
+
+    public void setInsertTimestamp(Date insertTimestamp) {
+        this.insertTimestamp = insertTimestamp;
     }
 
     public Date getStartTimestamp() {

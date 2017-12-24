@@ -5,6 +5,7 @@ import com.airdropaddict.webpage.shared.data.CatalogType;
 import com.airdropaddict.webpage.shared.data.EventData;
 import com.googlecode.objectify.Ref;
 
+import java.util.Date;
 import java.util.function.BiConsumer;
 
 public class EventUpdater implements BiConsumer<EventEntity, EventData> {
@@ -20,6 +21,7 @@ public class EventUpdater implements BiConsumer<EventEntity, EventData> {
         entity.setUrl(data.getUrl());
         entity.setImageUrl(data.getImageUrl());
         entity.setDescription(data.getDescription());
+        entity.setInsertTimestamp(data.getInsertTimestamp() == null ? new Date() : data.getInsertTimestamp());
         entity.setStartTimestamp(data.getStartTimestamp());
         entity.setEndTimestamp(data.getEndTimestamp());
         entity.setTasks(data.getTasks());

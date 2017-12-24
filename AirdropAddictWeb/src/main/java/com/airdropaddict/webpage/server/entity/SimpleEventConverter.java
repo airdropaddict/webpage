@@ -15,6 +15,7 @@ public class SimpleEventConverter implements Function<EventEntity, SimpleEventDa
         data.setUrl(entity.getUrl());
         data.setImageUrl(entity.getImageUrl());
         data.setDescription(entity.getDescription());
+        data.setInsertTimestamp(entity.getInsertTimestamp());
         data.setStartTimestamp(entity.getStartTimestamp());
         data.setEndTimestamp(entity.getEndTimestamp());
         data.setRating(entity.getRating());

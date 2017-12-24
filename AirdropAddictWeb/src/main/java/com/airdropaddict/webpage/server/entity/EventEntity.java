@@ -15,6 +15,8 @@ public class EventEntity extends BasicEntity {
     private String imageUrl;
     private String description;
     @Index
+    private Date insertTimestamp;
+    @Index
     private Date startTimestamp;
     @Index
     private Date endTimestamp;
@@ -62,6 +64,14 @@ public class EventEntity extends BasicEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date getInsertTimestamp() {
+        return insertTimestamp;
+    }
+
+    public void setInsertTimestamp(Date insertTimestamp) {
+        this.insertTimestamp = insertTimestamp;
     }
 
     public Date getStartTimestamp() {
