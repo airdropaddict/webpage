@@ -1,5 +1,7 @@
 package com.airdropaddict.webpage.client.ui;
 
+import com.airdropaddict.webpage.client.common.ClientEventBus;
+import com.airdropaddict.webpage.client.common.ShowPreviewEvent;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -31,6 +33,7 @@ public class WebpageView extends Composite {
 	AirdropsContainer airdrops;
 	UntrustedAirdropsContainer untrusted;
 	UntrustedAirdropsContainer tutorial;
+	AirdropPreview preview;
 
 	Widget currentWidget;
 
@@ -39,6 +42,8 @@ public class WebpageView extends Composite {
 		currentWidget = airdrops;
 		untrusted = new UntrustedAirdropsContainer();
 		tutorial = new UntrustedAirdropsContainer();
+		preview = new AirdropPreview();
+		ClientEventBus.register(ShowPreviewEvent.class, this::handleShowPreview);
 	}
 
 	private void changeContent(Widget widget) {
@@ -62,5 +67,10 @@ public class WebpageView extends Composite {
 	@UiHandler("tutorialTab")
 	void handleTutorialSelection(ClickEvent e) {
 		changeContent(tutorial);
+	}
+
+	void handleShowPreview(ShowPreviewEvent event) {
+		preview.present(event.title);
+		changeContent(airdrops);
 	}
 }

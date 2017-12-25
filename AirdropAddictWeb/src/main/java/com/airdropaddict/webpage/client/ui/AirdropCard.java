@@ -1,8 +1,12 @@
 package com.airdropaddict.webpage.client.ui;
 
+import com.airdropaddict.webpage.client.common.ClientEventBus;
+import com.airdropaddict.webpage.client.common.ShowPreviewEvent;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -27,5 +31,10 @@ public class AirdropCard extends Composite {
 
 	public void setTitle(String titlText) {
 		title.setText(titlText);
+	}
+
+	@UiHandler("title")
+	void handleClick(ClickEvent e) {
+		ClientEventBus.post(new ShowPreviewEvent(title.getText()));
 	}
 }
