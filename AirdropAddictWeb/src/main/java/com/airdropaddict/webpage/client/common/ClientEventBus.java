@@ -1,41 +1,32 @@
 package com.airdropaddict.webpage.client.common;
 
-import java.util.ArrayList;
+import static java.util.Optional.ofNullable;
+
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class ClientEventBus {
-	private static final Map<Class<? extends Object>, List<EventHandler<Object>>> handlers = new HashMap<>();
+	private static final Map<Class<? extends Object>, Set<EventHandler<Object>>> handlersByType = new HashMap<>();
 
 	private ClientEventBus() {
 	}
 
-	public static <T> void register(Class<T> eventType, EventHandler<T> handler) {
-		List<EventHandler<Object>> handlerList = handlers.get(eventType);
-		if (handlerList == null) {
-			handlerList = new ArrayList<EventHandler<Object>>();
-			handlers.put(eventType, handlerList);
-		}
-		
+	public static <T extends Object> boolean register(Class<T> eventType, EventHandler<T> handler) {
+		Set<EventHandler<Object>> handlers = handlersByType.computeIfAbsent(eventType, t -> new LinkedHashSet<>());
 		@SuppressWarnings("unchecked")
 		EventHandler<Object> casted = (EventHandler<Object>) handler;
-		handlerList.add(casted);
+		return handlers.add(casted);
 	}
 
-	public static <T> void unregister(Class<T> eventType, EventHandler<T> handler) {
-		// bus.unregister(listener);
+	public static <T> boolean unregister(Class<T> eventType, EventHandler<T> handler) {
+		Set<EventHandler<Object>> handlers = handlersByType.get(eventType);
+		return handlers == null ? false : handlers.remove(handler);
 	}
 
-	public static void post(Object event) {
-		List<EventHandler<Object>> handlerList = handlers.get(event.getClass());
-		if (handlerList == null) {
-			return;
-		}
-
-		for (EventHandler<Object> handler : handlerList) {
-			handler.handle(event);
-		}
+	public static <T> void post(Object event) {
+		ofNullable(event).map(e -> handlersByType.get(e.getClass())).ifPresent(s -> s.forEach(h -> h.handle(event)));
 	}
 
 	public interface EventHandler<T> {

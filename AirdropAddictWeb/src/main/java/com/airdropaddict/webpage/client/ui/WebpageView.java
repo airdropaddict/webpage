@@ -71,6 +71,6 @@ public class WebpageView extends Composite {
 
 	void handleShowPreview(ShowPreviewEvent event) {
 		preview.present(event.title);
-		changeContent(airdrops);
+		changeContent(preview);
 	}
 }
