@@ -74,16 +74,21 @@
 			</m:MaterialContainer>
 
 			<m:MaterialContainer depth="998" addStyleNames="{style.customFooter}"
-				backgroundColor="LIGHT_BLUE" verticalAlign="MIDDLE">
-				<m:MaterialRow verticalAlign="MIDDLE">
+				backgroundColor="LIGHT_BLUE">
+				<m:MaterialRow>
 					<m:MaterialLabel text="© Copyright AirdropAddict"
-						grid="s10" paddingLeft="20" verticalAlign="MIDDLE" textColor="WHITE" />
-					<m:MaterialColumn grid="s2" paddingRight="30"
-						verticalAlign="MIDDLE">
-						<m:MaterialImage url="./images/twitter-3-32.png"
-							verticalAlign="MIDDLE" float="RIGHT" paddingLeft="15" />
-						<m:MaterialImage url="./images/facebook-3-32.png"
-							verticalAlign="MIDDLE" float="RIGHT" paddingLeft="15" />
+						grid="s10" paddingLeft="20" paddingTop="10" textColor="WHITE" />
+					<m:MaterialColumn grid="s2" paddingRight="30">
+						<m:MaterialLink href="https://www.facebook.com/airdropaddict"
+							target="_blank">
+							<m:MaterialImage url="./images/facebook-3-32.png"
+								float="RIGHT" paddingLeft="15" paddingTop="5" />
+						</m:MaterialLink>
+						<m:MaterialLink href="https://twitter.com/airdropaddict"
+							target="_blank">
+							<m:MaterialImage url="./images/twitter-3-32.png"
+								float="RIGHT" paddingTop="5" />
+						</m:MaterialLink>
 					</m:MaterialColumn>
 				</m:MaterialRow>
 			</m:MaterialContainer>
