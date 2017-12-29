@@ -10,88 +10,111 @@
 		width: 100%;
 		height: 40px
 	}
+	
+	.customHeader {
+		position: fixed;
+		top: 0;
+		width: 100%;
+		height: 70px
+	}
 	</ui:style>
 
-	<g:HTMLPanel>
-		<m:MaterialPanel>
-			<m:MaterialHeader layoutPosition="FIXED" width="100%"
-				shadow="1" depth="996" backgroundColor="LIGHT_BLUE">
-				<m:MaterialNavBar backgroundColor="LIGHT_BLUE"
-					height="88px">
-					<m:MaterialNavSection paddingLeft="30"
-						paddingRight="0" paddingBottom="0" hideOn="NONE" position="LEFT">
+	<m:MaterialContainer>
+		<m:MaterialPanel depth="998" addStyleNames="{style.customHeader}"
+			backgroundColor="LIGHT_BLUE" shadow="1">
+			<m:MaterialRow>
+				<m:MaterialColumn grid="s11 m11 l8" border="0">
+					<m:MaterialPanel>
 						<m:MaterialImage url="./images/logoHeader.png"
 							padding="0" paddingTop="10" />
 						<m:MaterialLabel text="AirdropAddict" fontSize="3.0em"
-							fontWeight="BOLD" paddingLeft="10" paddingTop="10" />
-					</m:MaterialNavSection>
-					<m:MaterialNavSection hideOn="HIDE_ON_MED_DOWN"
-						position="RIGHT">
-						<m:MaterialNavContent paddingTop="15">
-							<m:MaterialTab backgroundColor="LIGHT_BLUE"
-								fontWeight="BOLD">
-								<m:MaterialTabItem ui:field="airdropsTab">
-									<m:MaterialLink text="Daly Airdrops" textColor="WHITE"
-										waves="DEFAULT" />
-								</m:MaterialTabItem>
-								<m:MaterialTabItem ui:field="untrustedTab">
-									<m:MaterialLink text="Untrusted Airdrops"
-										textColor="WHITE" waves="DEFAULT" />
-								</m:MaterialTabItem>
-								<m:MaterialTabItem ui:field="tutorialTab">
-									<m:MaterialLink text="Tutorial" textColor="WHITE"
-										waves="DEFAULT" />
-								</m:MaterialTabItem>
-							</m:MaterialTab>
-						</m:MaterialNavContent>
-					</m:MaterialNavSection>
-					<m:MaterialNavSection position="RIGHT" hideOn="HIDE_ON_LARGE">
-						<m:MaterialLink iconType="MENU" activates="dropdown" />
-					</m:MaterialNavSection>
-				</m:MaterialNavBar>
+							fontWeight="BOLD" paddingLeft="10" paddingTop="10" textColor="WHITE" />
+					</m:MaterialPanel>
+				</m:MaterialColumn>
+				<m:MaterialColumn grid="s1 m1 l4" border="0">
+					<m:MaterialTab backgroundColor="LIGHT_BLUE"
+						fontWeight="BOLD" hideOn="HIDE_ON_MED_DOWN">
+						<m:MaterialTabItem ui:field="airdropsTab">
+							<m:MaterialLink text="Daly Airdrops" textColor="WHITE"
+								waves="DEFAULT" />
+						</m:MaterialTabItem>
+						<m:MaterialTabItem ui:field="untrustedTab">
+							<m:MaterialLink text="Untrusted Airdrops"
+								textColor="WHITE" waves="DEFAULT" />
+						</m:MaterialTabItem>
+						<m:MaterialTabItem ui:field="tutorialTab">
+							<m:MaterialLink text="Tutorial" textColor="WHITE"
+								waves="DEFAULT" />
+						</m:MaterialTabItem>
+					</m:MaterialTab>
+				</m:MaterialColumn>
+				<m:MaterialColumn grid="s1 m1 l4" border="0">
+					<m:MaterialLink iconType="MENU" activates="dropdown"
+						hideOn="HIDE_ON_LARGE" />
+				</m:MaterialColumn>
+			</m:MaterialRow>
 
-				<m:MaterialDropDown activator="dropdown"
-					belowOrigin="false">
-					<m:MaterialLink text="Daly Airdrops" />
-					<m:MaterialLink text="Untrusted Airdrops" />
-					<m:MaterialLink text="Tutorial" />
-				</m:MaterialDropDown>
-			</m:MaterialHeader>
-
-			<m:MaterialContainer paddingTop="120"
-				paddingLeft="130" paddingRight="130">
-				<m:MaterialRow>
-					<m:MaterialColumn grid="s12 m12 l9" border="0"
-						ui:field="content">
-						<my:AirdropsContainer ui:field="airdrops">
-						</my:AirdropsContainer>
-					</m:MaterialColumn>
-					<m:MaterialColumn grid="s12 m12 l3" border="0">
-						<my:InfosContainer>
-						</my:InfosContainer>
-					</m:MaterialColumn>
-				</m:MaterialRow>
-			</m:MaterialContainer>
-
-			<m:MaterialContainer depth="998" addStyleNames="{style.customFooter}"
-				backgroundColor="LIGHT_BLUE">
-				<m:MaterialRow>
-					<m:MaterialLabel text="© Copyright AirdropAddict"
-						grid="s10" paddingLeft="20" paddingTop="10" textColor="WHITE" />
-					<m:MaterialColumn grid="s2" paddingRight="30">
-						<m:MaterialLink href="https://www.facebook.com/airdropaddict"
-							target="_blank">
-							<m:MaterialImage url="./images/facebook-3-32.png"
-								float="RIGHT" paddingLeft="15" paddingTop="5" />
-						</m:MaterialLink>
-						<m:MaterialLink href="https://twitter.com/airdropaddict"
-							target="_blank">
-							<m:MaterialImage url="./images/twitter-3-32.png"
-								float="RIGHT" paddingTop="5" />
-						</m:MaterialLink>
-					</m:MaterialColumn>
-				</m:MaterialRow>
-			</m:MaterialContainer>
+			<m:MaterialDropDown activator="dropdown">
+				<m:MaterialLink text="Daly Airdrops" />
+				<m:MaterialLink text="Untrusted Airdrops" />
+				<m:MaterialLink text="Tutorial" />
+			</m:MaterialDropDown>
 		</m:MaterialPanel>
-	</g:HTMLPanel>
+
+
+		<!-- <m:MaterialHeader layoutPosition="FIXED" width="100%" shadow="1" depth="996" 
+			backgroundColor="LIGHT_BLUE"> <m:MaterialNavBar backgroundColor="LIGHT_BLUE" 
+			height="88px"> <m:MaterialNavSection paddingLeft="30" paddingRight="0" paddingBottom="0" 
+			hideOn="NONE" position="LEFT"> <m:MaterialImage url="./images/logoHeader.png" 
+			padding="0" paddingTop="10" /> <m:MaterialLabel text="AirdropAddict" fontSize="3.0em" 
+			fontWeight="BOLD" paddingLeft="10" paddingTop="10" /> </m:MaterialNavSection> 
+			<m:MaterialNavSection hideOn="HIDE_ON_MED_DOWN" position="RIGHT"> <m:MaterialNavContent 
+			paddingTop="15"> <m:MaterialTab backgroundColor="LIGHT_BLUE" fontWeight="BOLD"> 
+			<m:MaterialTabItem ui:field="airdropsTab"> <m:MaterialLink text="Daly Airdrops" 
+			textColor="WHITE" waves="DEFAULT" /> </m:MaterialTabItem> <m:MaterialTabItem 
+			ui:field="untrustedTab"> <m:MaterialLink text="Untrusted Airdrops" textColor="WHITE" 
+			waves="DEFAULT" /> </m:MaterialTabItem> <m:MaterialTabItem ui:field="tutorialTab"> 
+			<m:MaterialLink text="Tutorial" textColor="WHITE" waves="DEFAULT" /> </m:MaterialTabItem> 
+			</m:MaterialTab> </m:MaterialNavContent> </m:MaterialNavSection> <m:MaterialNavSection 
+			position="RIGHT" hideOn="HIDE_ON_LARGE"> <m:MaterialLink iconType="MENU" 
+			activates="dropdown" /> </m:MaterialNavSection> </m:MaterialNavBar> <m:MaterialDropDown 
+			activator="dropdown"> <m:MaterialLink text="Daly Airdrops" /> <m:MaterialLink 
+			text="Untrusted Airdrops" /> <m:MaterialLink text="Tutorial" /> </m:MaterialDropDown> 
+			</m:MaterialHeader> -->
+
+		<m:MaterialPanel paddingTop="120" paddingLeft="130"
+			paddingRight="130">
+			<m:MaterialRow>
+				<m:MaterialColumn grid="s12 m12 l9" border="0"
+					ui:field="content">
+					<my:AirdropsContainer ui:field="airdrops">
+					</my:AirdropsContainer>
+				</m:MaterialColumn>
+				<m:MaterialColumn grid="s12 m12 l3" border="0">
+					<my:InfosContainer>
+					</my:InfosContainer>
+				</m:MaterialColumn>
+			</m:MaterialRow>
+		</m:MaterialPanel>
+
+		<m:MaterialPanel depth="998" addStyleNames="{style.customFooter}"
+			backgroundColor="LIGHT_BLUE" shadow="1">
+			<m:MaterialRow>
+				<m:MaterialLabel text="© Copyright AirdropAddict"
+					grid="s10" paddingLeft="20" paddingTop="10" textColor="WHITE" />
+				<m:MaterialColumn grid="s2" paddingRight="30">
+					<m:MaterialLink href="https://www.facebook.com/airdropaddict"
+						target="_blank">
+						<m:MaterialImage url="./images/facebook-3-32.png"
+							float="RIGHT" paddingLeft="15" paddingTop="5" />
+					</m:MaterialLink>
+					<m:MaterialLink href="https://twitter.com/airdropaddict"
+						target="_blank">
+						<m:MaterialImage url="./images/twitter-3-32.png"
+							float="RIGHT" paddingTop="5" />
+					</m:MaterialLink>
+				</m:MaterialColumn>
+			</m:MaterialRow>
+		</m:MaterialPanel>
+	</m:MaterialContainer>
 </ui:UiBinder> 
