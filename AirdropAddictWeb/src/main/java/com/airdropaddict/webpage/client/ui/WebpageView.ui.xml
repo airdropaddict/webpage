@@ -24,12 +24,13 @@
 			backgroundColor="LIGHT_BLUE" shadow="1">
 			<m:MaterialRow>
 				<m:MaterialColumn grid="s11 m11 l8" border="0">
-					<m:MaterialPanel>
+					<m:MaterialRow>
 						<m:MaterialImage url="./images/logoHeader.png"
-							padding="0" paddingTop="10" />
+							grid="s1" width="50" height="50" />
 						<m:MaterialLabel text="AirdropAddict" fontSize="3.0em"
-							fontWeight="BOLD" paddingLeft="10" paddingTop="10" textColor="WHITE" />
-					</m:MaterialPanel>
+							grid="s11" fontWeight="BOLD" paddingLeft="10" paddingTop="8"
+							textColor="WHITE" />
+					</m:MaterialRow>
 				</m:MaterialColumn>
 				<m:MaterialColumn grid="s1 m1 l4" border="0">
 					<m:MaterialTab backgroundColor="LIGHT_BLUE"
@@ -50,7 +51,7 @@
 				</m:MaterialColumn>
 				<m:MaterialColumn grid="s1 m1 l4" border="0">
 					<m:MaterialLink iconType="MENU" activates="dropdown"
-						hideOn="HIDE_ON_LARGE" />
+						textColor="WHITE" fontSize="3.0em" hideOn="HIDE_ON_LARGE" />
 				</m:MaterialColumn>
 			</m:MaterialRow>
 
@@ -60,27 +61,6 @@
 				<m:MaterialLink text="Tutorial" />
 			</m:MaterialDropDown>
 		</m:MaterialPanel>
-
-
-		<!-- <m:MaterialHeader layoutPosition="FIXED" width="100%" shadow="1" depth="996" 
-			backgroundColor="LIGHT_BLUE"> <m:MaterialNavBar backgroundColor="LIGHT_BLUE" 
-			height="88px"> <m:MaterialNavSection paddingLeft="30" paddingRight="0" paddingBottom="0" 
-			hideOn="NONE" position="LEFT"> <m:MaterialImage url="./images/logoHeader.png" 
-			padding="0" paddingTop="10" /> <m:MaterialLabel text="AirdropAddict" fontSize="3.0em" 
-			fontWeight="BOLD" paddingLeft="10" paddingTop="10" /> </m:MaterialNavSection> 
-			<m:MaterialNavSection hideOn="HIDE_ON_MED_DOWN" position="RIGHT"> <m:MaterialNavContent 
-			paddingTop="15"> <m:MaterialTab backgroundColor="LIGHT_BLUE" fontWeight="BOLD"> 
-			<m:MaterialTabItem ui:field="airdropsTab"> <m:MaterialLink text="Daly Airdrops" 
-			textColor="WHITE" waves="DEFAULT" /> </m:MaterialTabItem> <m:MaterialTabItem 
-			ui:field="untrustedTab"> <m:MaterialLink text="Untrusted Airdrops" textColor="WHITE" 
-			waves="DEFAULT" /> </m:MaterialTabItem> <m:MaterialTabItem ui:field="tutorialTab"> 
-			<m:MaterialLink text="Tutorial" textColor="WHITE" waves="DEFAULT" /> </m:MaterialTabItem> 
-			</m:MaterialTab> </m:MaterialNavContent> </m:MaterialNavSection> <m:MaterialNavSection 
-			position="RIGHT" hideOn="HIDE_ON_LARGE"> <m:MaterialLink iconType="MENU" 
-			activates="dropdown" /> </m:MaterialNavSection> </m:MaterialNavBar> <m:MaterialDropDown 
-			activator="dropdown"> <m:MaterialLink text="Daly Airdrops" /> <m:MaterialLink 
-			text="Untrusted Airdrops" /> <m:MaterialLink text="Tutorial" /> </m:MaterialDropDown> 
-			</m:MaterialHeader> -->
 
 		<m:MaterialPanel paddingTop="120" paddingLeft="130"
 			paddingRight="130">
