@@ -32,24 +32,15 @@
 						textColor="WHITE" flex="ELEVEN" />
 				</m:MaterialColumn>
 				<m:MaterialColumn grid="s1 m1 l5" border="0"
-					hideOn="HIDE_ON_MED_DOWN">
+					hideOn="HIDE_ON_MED_DOWN" marginTop="28">
 					<m:MaterialLink text="DalyAirdrops" textColor="ORANGE_LIGHTEN_3"
-						waves="ORANGE" ui:field="airdropsTab" fontSize="1.2em" fontWeight="BOLD"
-						paddingTop="28" />
+						waves="ORANGE" ui:field="airdropsTab" fontSize="1.2em" fontWeight="BOLD" />
 					<m:MaterialLink text="UntrustedAirdrops" textColor="WHITE"
 						waves="ORANGE" ui:field="untrustedTab" fontSize="1.2em"
-						fontWeight="BOLD" paddingLeft="16" paddingTop="28" />
+						fontWeight="BOLD" paddingLeft="16" />
 					<m:MaterialLink text="Tutorial" textColor="WHITE"
 						waves="ORANGE" ui:field="tutorialTab" fontSize="1.2em" fontWeight="BOLD"
-						paddingLeft="16" paddingTop="28" />
-
-					<!-- <m:MaterialTab backgroundColor="LIGHT_BLUE" fontWeight="BOLD" hideOn="HIDE_ON_MED_DOWN"> 
-						<m:MaterialTabItem ui:field="airdropsTab"> <m:MaterialLink text="Daly Airdrops" 
-						textColor="WHITE" waves="DEFAULT" /> </m:MaterialTabItem> <m:MaterialTabItem 
-						ui:field="untrustedTab"> <m:MaterialLink text="Untrusted Airdrops" textColor="WHITE" 
-						waves="DEFAULT" /> </m:MaterialTabItem> <m:MaterialTabItem ui:field="tutorialTab"> 
-						<m:MaterialLink text="Tutorial" textColor="WHITE" waves="DEFAULT" /> </m:MaterialTabItem> 
-						</m:MaterialTab> -->
+						paddingLeft="16" />
 				</m:MaterialColumn>
 				<m:MaterialColumn grid="s1 m1 l5" border="0"
 					hideOn="HIDE_ON_LARGE">
