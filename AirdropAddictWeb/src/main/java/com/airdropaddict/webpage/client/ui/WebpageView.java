@@ -10,8 +10,9 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.ui.MaterialColumn;
-import gwt.material.design.client.ui.MaterialTabItem;
+import gwt.material.design.client.ui.MaterialLink;
 
 public class WebpageView extends Composite {
 	private static WebpageViewUiBinder uiBinder = GWT.create(WebpageViewUiBinder.class);
@@ -20,11 +21,11 @@ public class WebpageView extends Composite {
 	}
 
 	@UiField
-	MaterialTabItem airdropsTab;
+	MaterialLink airdropsTab;
 	@UiField
-	MaterialTabItem untrustedTab;
+	MaterialLink untrustedTab;
 	@UiField
-	MaterialTabItem tutorialTab;
+	MaterialLink tutorialTab;
 
 	@UiField
 	MaterialColumn content;
@@ -56,16 +57,25 @@ public class WebpageView extends Composite {
 
 	@UiHandler("airdropsTab")
 	void handleAirdropsSelection(ClickEvent e) {
+		airdropsTab.setTextColor(Color.ORANGE_LIGHTEN_3);
+		untrustedTab.setTextColor(Color.WHITE);
+		tutorialTab.setTextColor(Color.WHITE);
 		changeContent(airdrops);
 	}
 
 	@UiHandler("untrustedTab")
 	void handleUntrustedSelection(ClickEvent e) {
+		airdropsTab.setTextColor(Color.WHITE);
+		untrustedTab.setTextColor(Color.ORANGE_LIGHTEN_3);
+		tutorialTab.setTextColor(Color.WHITE);
 		changeContent(untrusted);
 	}
 
 	@UiHandler("tutorialTab")
 	void handleTutorialSelection(ClickEvent e) {
+		airdropsTab.setTextColor(Color.WHITE);
+		untrustedTab.setTextColor(Color.WHITE);
+		tutorialTab.setTextColor(Color.ORANGE_LIGHTEN_3);
 		changeContent(tutorial);
 	}
 
