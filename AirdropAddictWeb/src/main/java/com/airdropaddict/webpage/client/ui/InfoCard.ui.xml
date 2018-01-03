@@ -9,7 +9,7 @@
 		<m:MaterialColumn grid="s12">
 			<m:MaterialCard ui:field="card" hoverable="true"
 				backgroundColor="BLUE_GREY_DARKEN_1">
-				<m:MaterialCardContent textColor="ORANGE">
+				<m:MaterialCardContent textColor="ORANGE_LIGHTEN_2">
 					<m:MaterialCardTitle text="Sample Info Card" />
 					<m:MaterialLabel
 						text="I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively." />
