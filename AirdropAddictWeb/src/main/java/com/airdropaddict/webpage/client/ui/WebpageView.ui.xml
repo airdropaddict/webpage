@@ -8,14 +8,25 @@
 		position: fixed;
 		top: 0;
 		width: 100%;
-		height: 55px
+		height: 55px;
 	}
 	
 	.customFooter {
 		position: fixed;
 		bottom: 0;
 		width: 100%;
-		height: 40px
+		height: 40px;
+	}
+	
+	.customNav {
+		position: fixed;
+		right: 0;
+		top: 55px;
+		width: 200px;
+		height: 100%;
+		border-width: 0px 0px 0px 6px;
+		border-style: solid;
+		border-color: #03a9f4;
 	}
 	</ui:style>
 
@@ -29,8 +40,7 @@
 					<m:MaterialImage url="./images/logoHeader.png"
 						grid="s6" width="54px" height="52px" paddingTop="4" flex="NONE" />
 					<m:MaterialLabel text="AirdropAddict" fontSize="3.0em"
-						grid="s6 " fontWeight="BOLD" paddingLeft="2" paddingTop="2"
-						textColor="WHITE" flex="ELEVEN" />
+						grid="s6 " paddingLeft="2" paddingTop="2" textColor="WHITE" flex="ELEVEN" />
 				</m:MaterialColumn>
 				<m:MaterialColumn grid="s1 m1 l5" border="0"
 					hideOn="HIDE_ON_MED_DOWN" marginTop="16">
@@ -38,38 +48,45 @@
 						textColor="WHITE" waves="ORANGE" paddingLeft="16" paddingRight="16"
 						float="RIGHT" />
 					<m:MaterialLink text="Tutorial" textColor="WHITE"
-						waves="ORANGE" ui:field="tutorialTab" fontSize="1.2em" fontWeight="BOLD"
+						waves="ORANGE" ui:field="tutorialTab" fontSize="1.2em"
 						paddingLeft="16" float="RIGHT" />
 					<m:MaterialLink text="UntrustedAirdrops" textColor="WHITE"
 						waves="ORANGE" ui:field="untrustedTab" fontSize="1.2em"
-						fontWeight="BOLD" paddingLeft="16" float="RIGHT" />
+						paddingLeft="16" float="RIGHT" />
 					<m:MaterialLink text="DalyAirdrops" textColor="ORANGE_LIGHTEN_3"
-						waves="ORANGE" ui:field="airdropsTab" fontSize="1.2em" fontWeight="BOLD"
-						float="RIGHT" />
+						waves="ORANGE" ui:field="airdropsTab" fontSize="1.2em" float="RIGHT" />
 				</m:MaterialColumn>
 				<m:MaterialColumn grid="s1 m1 l5" border="0"
 					hideOn="HIDE_ON_LARGE" marginTop="14">
-					<m:MaterialLink m:id="sidenavActivator" iconType="MENU"
-						activates="sidenav" textColor="WHITE" fontSize="3.0em" float="RIGHT" />
+					<m:MaterialLink ui:field="sidenavActivator"
+						iconType="MENU" textColor="WHITE" fontSize="3.0em" float="RIGHT" />
 				</m:MaterialColumn>
 			</m:MaterialRow>
 
-			<!-- <m:MaterialSideNav m:id="sidenav" width="200" closeOnClick="true" 
-				showOnAttach="false"> <m:MaterialLink text="Daly Airdrops" /> <m:MaterialLink 
-				text="Untrusted Airdrops" /> <m:MaterialLink text="Tutorial" /> </m:MaterialSideNav> -->
+			<m:MaterialPanel ui:field="sidenav" depth="1000"
+				addStyleNames="{style.customNav}" visible="false" backgroundColor="GREY_LIGHTEN_2"
+				hideOn="HIDE_ON_LARGE">
 
-			<my:CustomMaterialSideNavDrawer m:id="sidenav"
-				ui:field="sideNav" withHeader="false" allowBodyScroll="false" edge="RIGHT">
-				<m:MaterialLink iconType="SEND" text="Send Mail" />
-				<m:MaterialLink iconType="DRAFTS" text="Drafts" />
-				<m:MaterialLink iconType="MAIL" text="All Mail" />
-				<m:MaterialLink iconType="DELETE" text="Trash" />
-				<m:MaterialLink iconType="INFO_OUTLINE" text="Spam" />
-			</my:CustomMaterialSideNavDrawer>
-
-			<!-- <m:MaterialDropDown activator="dropdown" width="180px"> <m:MaterialLink 
-				text="Daly Airdrops" /> <m:MaterialLink text="Untrusted Airdrops" /> <m:MaterialLink 
-				text="Tutorial" /> </m:MaterialDropDown> -->
+				<ma:tree.MaterialTree ui:field="docTree">
+					<ma:tree.MaterialTreeItem iconType="FOLDER"
+						text="DalyAirdrops" />
+					<ma:tree.MaterialTreeItem iconType="FOLDER"
+						text="UntrustedAirdrops" />
+					<ma:tree.MaterialTreeItem iconType="FOLDER"
+						text="Tutorial" />
+					<ma:tree.MaterialTreeItem iconType="ACCOUNT_CIRCLE"
+						text="Account">
+						<ma:tree.MaterialTreeItem iconType="FOLDER"
+							text="Dashboard" />
+						<ma:tree.MaterialTreeItem iconType="FOLDER"
+							text="SignUp" />
+						<ma:tree.MaterialTreeItem iconType="FOLDER"
+							text="SignIn" />
+						<ma:tree.MaterialTreeItem iconType="FOLDER"
+							text="LogOut" />
+					</ma:tree.MaterialTreeItem>
+				</ma:tree.MaterialTree>
+			</m:MaterialPanel>
 		</m:MaterialPanel>
 
 		<m:MaterialPanel paddingTop="120" paddingLeft="130"

@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.ui.MaterialColumn;
 import gwt.material.design.client.ui.MaterialLink;
+import gwt.material.design.client.ui.MaterialPanel;
 
 public class WebpageView extends Composite {
 	private static WebpageViewUiBinder uiBinder = GWT.create(WebpageViewUiBinder.class);
@@ -26,6 +27,11 @@ public class WebpageView extends Composite {
 	MaterialLink untrustedTab;
 	@UiField
 	MaterialLink tutorialTab;
+
+	@UiField
+	MaterialLink sidenavActivator;
+	@UiField
+	MaterialPanel sidenav;
 
 	@UiField
 	MaterialColumn content;
@@ -82,5 +88,10 @@ public class WebpageView extends Composite {
 	void handleShowPreview(ShowPreviewEvent event) {
 		preview.present(event.title);
 		changeContent(preview);
+	}
+
+	@UiHandler("sidenavActivator")
+	void handleSideNav(ClickEvent e) {
+		sidenav.setVisible(!sidenav.isVisible());
 	}
 }
