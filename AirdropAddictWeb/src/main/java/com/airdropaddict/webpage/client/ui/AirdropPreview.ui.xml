@@ -1,15 +1,13 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:m="urn:import:gwt.material.design.client.ui"
-	xmlns:ma="urn:import:gwt.material.design.addins.client">
+	xmlns:ma="urn:import:gwt.material.design.addins.client" xmlns:my="urn:import:com.airdropaddict.webpage.client.ui">
 	<g:HTMLPanel>
 		<m:MaterialCard>
 			<m:MaterialCardContent textColor="LIGHT_BLUE"
 				backgroundColor="WHITE" padding="5" border="5" paddingLeft="15">
 				<m:MaterialCardTitle ui:field="title"
 					addStyleNames="truncate" />
-				<ma:rating.MaterialRating textColor="AMBER_LIGHTEN_1"
-					border="0" />
 			</m:MaterialCardContent>
 			<m:MaterialDivider />
 			<m:MaterialCardContent backgroundColor="WHITE">
@@ -28,6 +26,59 @@
 					</m:MaterialCollectionItem>
 				</m:MaterialCollection>
 			</m:MaterialCardContent>
+			<m:MaterialDivider />
+			<m:MaterialCardContent backgroundColor="WHITE">
+				<m:MaterialButton text="Like" backgroundColor="LIGHT_BLUE" />
+				<m:MaterialButton text="Report Scam"
+					backgroundColor="LIGHT_BLUE" marginLeft="10" />
+			</m:MaterialCardContent>
 		</m:MaterialCard>
+
+		<m:MaterialLabel text="Comments" fontSize="2.0em"
+			textColor="LIGHT_BLUE" />
+
+		<m:MaterialCard>
+			<m:MaterialCardContent>
+				<m:MaterialTextArea />
+				<m:MaterialButton text="Post" backgroundColor="LIGHT_BLUE" />
+			</m:MaterialCardContent>
+		</m:MaterialCard>
+
+		<m:MaterialCard>
+			<m:MaterialCardContent textColor="LIGHT_BLUE"
+				backgroundColor="WHITE" padding="5" border="5" paddingLeft="15">
+				<m:MaterialCardTitle addStyleNames="truncate"
+					text="Anonymous" />
+			</m:MaterialCardContent>
+			<m:MaterialDivider />
+			<m:MaterialCardContent backgroundColor="WHITE">
+				<m:MaterialLabel
+					text="Coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment." />
+			</m:MaterialCardContent>
+			<m:MaterialDivider />
+			<m:MaterialCardContent backgroundColor="WHITE">
+				<m:MaterialLabel text="1.1.2018 8:30 PM" />
+			</m:MaterialCardContent>
+		</m:MaterialCard>
+
+		<m:MaterialCard>
+			<m:MaterialCardContent textColor="LIGHT_BLUE"
+				backgroundColor="WHITE" padding="5" border="5" paddingLeft="15">
+				<m:MaterialCardTitle addStyleNames="truncate"
+					text="MisterX" />
+			</m:MaterialCardContent>
+			<m:MaterialDivider />
+			<m:MaterialCardContent backgroundColor="WHITE">
+				<m:MaterialLabel
+					text="Coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment coment." />
+			</m:MaterialCardContent>
+			<m:MaterialDivider />
+			<m:MaterialCardContent backgroundColor="WHITE">
+				<m:MaterialLabel text="1.1.2018 9:30 PM" />
+			</m:MaterialCardContent>
+		</m:MaterialCard>
+
+		<my:NavigationContainer>
+		</my:NavigationContainer>
 	</g:HTMLPanel>
 </ui:UiBinder> 

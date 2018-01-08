@@ -63,30 +63,47 @@
 				</m:MaterialColumn>
 			</m:MaterialRow>
 
-			<m:MaterialPanel ui:field="sidenav" depth="1000"
-				addStyleNames="{style.customNav}" visible="false" backgroundColor="GREY_LIGHTEN_2"
+			<m:MaterialPanel ui:field="sideNav" depth="1000"
+				addStyleNames="{style.customNav}" visible="false" backgroundColor="LIGHT_BLUE"
 				hideOn="HIDE_ON_LARGE">
 
-				<ma:tree.MaterialTree ui:field="docTree">
-					<ma:tree.MaterialTreeItem iconType="FOLDER"
-						text="DalyAirdrops" />
-					<ma:tree.MaterialTreeItem iconType="FOLDER"
-						text="UntrustedAirdrops" />
-					<ma:tree.MaterialTreeItem iconType="FOLDER"
-						text="Tutorial" />
+				<ma:tree.MaterialTree>
+					<ma:tree.MaterialTreeItem text="DalyAirdrops"
+						ui:field="airdropsItem" textColor="ORANGE_LIGHTEN_3" />
+					<ma:tree.MaterialTreeItem text="UntrustedAirdrops"
+						ui:field="untrustedItem" textColor="WHITE" />
+					<ma:tree.MaterialTreeItem text="Tutorial"
+						ui:field="tutorialItem" textColor="WHITE" />
 					<ma:tree.MaterialTreeItem iconType="ACCOUNT_CIRCLE"
-						text="Account">
-						<ma:tree.MaterialTreeItem iconType="FOLDER"
-							text="Dashboard" />
-						<ma:tree.MaterialTreeItem iconType="FOLDER"
-							text="SignUp" />
-						<ma:tree.MaterialTreeItem iconType="FOLDER"
-							text="SignIn" />
-						<ma:tree.MaterialTreeItem iconType="FOLDER"
-							text="LogOut" />
+						text="Anonymous" textColor="WHITE">
+						<ma:tree.MaterialTreeItem text="Dashboard"
+							textColor="WHITE" />
+						<ma:tree.MaterialTreeItem text="SignUp"
+							textColor="WHITE" />
+						<ma:tree.MaterialTreeItem text="SignIn"
+							textColor="WHITE" />
+						<ma:tree.MaterialTreeItem text="LogOut"
+							textColor="WHITE" />
 					</ma:tree.MaterialTreeItem>
 				</ma:tree.MaterialTree>
 			</m:MaterialPanel>
+
+			<m:MaterialPanel ui:field="userNav" depth="1000"
+				addStyleNames="{style.customNav}" visible="false" backgroundColor="LIGHT_BLUE"
+				enabled="false" hideOn="HIDE_ON_MED_DOWN">
+
+				<ma:tree.MaterialTree>
+					<ma:tree.MaterialTreeItem text="Dashboard"
+						textColor="WHITE" />
+					<ma:tree.MaterialTreeItem text="SignUp"
+						textColor="WHITE" />
+					<ma:tree.MaterialTreeItem text="SignIn"
+						textColor="WHITE" />
+					<ma:tree.MaterialTreeItem text="LogOut"
+						textColor="WHITE" />
+				</ma:tree.MaterialTree>
+			</m:MaterialPanel>
+
 		</m:MaterialPanel>
 
 		<m:MaterialPanel paddingTop="120" paddingLeft="130"

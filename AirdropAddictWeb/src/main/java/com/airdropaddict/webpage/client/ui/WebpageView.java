@@ -10,6 +10,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.addins.client.tree.MaterialTreeItem;
 import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.ui.MaterialColumn;
 import gwt.material.design.client.ui.MaterialLink;
@@ -27,11 +28,22 @@ public class WebpageView extends Composite {
 	MaterialLink untrustedTab;
 	@UiField
 	MaterialLink tutorialTab;
+	@UiField
+	MaterialLink accountLink;
+
+	@UiField
+	MaterialTreeItem airdropsItem;
+	@UiField
+	MaterialTreeItem untrustedItem;
+	@UiField
+	MaterialTreeItem tutorialItem;
 
 	@UiField
 	MaterialLink sidenavActivator;
 	@UiField
-	MaterialPanel sidenav;
+	MaterialPanel sideNav;
+	@UiField
+	MaterialPanel userNav;
 
 	@UiField
 	MaterialColumn content;
@@ -61,27 +73,42 @@ public class WebpageView extends Composite {
 		}
 	}
 
-	@UiHandler("airdropsTab")
+	@UiHandler({ "airdropsTab", "airdropsItem" })
 	void handleAirdropsSelection(ClickEvent e) {
 		airdropsTab.setTextColor(Color.ORANGE_LIGHTEN_3);
 		untrustedTab.setTextColor(Color.WHITE);
 		tutorialTab.setTextColor(Color.WHITE);
+
+		airdropsItem.setTextColor(Color.ORANGE_LIGHTEN_3);
+		untrustedItem.setTextColor(Color.WHITE);
+		tutorialItem.setTextColor(Color.WHITE);
+
 		changeContent(airdrops);
 	}
 
-	@UiHandler("untrustedTab")
+	@UiHandler({ "untrustedTab", "untrustedItem" })
 	void handleUntrustedSelection(ClickEvent e) {
 		airdropsTab.setTextColor(Color.WHITE);
 		untrustedTab.setTextColor(Color.ORANGE_LIGHTEN_3);
 		tutorialTab.setTextColor(Color.WHITE);
+
+		airdropsItem.setTextColor(Color.WHITE);
+		untrustedItem.setTextColor(Color.ORANGE_LIGHTEN_3);
+		tutorialItem.setTextColor(Color.WHITE);
+
 		changeContent(untrusted);
 	}
 
-	@UiHandler("tutorialTab")
+	@UiHandler({ "tutorialTab", "tutorialItem" })
 	void handleTutorialSelection(ClickEvent e) {
 		airdropsTab.setTextColor(Color.WHITE);
 		untrustedTab.setTextColor(Color.WHITE);
 		tutorialTab.setTextColor(Color.ORANGE_LIGHTEN_3);
+
+		airdropsItem.setTextColor(Color.WHITE);
+		untrustedItem.setTextColor(Color.WHITE);
+		tutorialItem.setTextColor(Color.ORANGE_LIGHTEN_3);
+
 		changeContent(tutorial);
 	}
 
@@ -92,6 +119,11 @@ public class WebpageView extends Composite {
 
 	@UiHandler("sidenavActivator")
 	void handleSideNav(ClickEvent e) {
-		sidenav.setVisible(!sidenav.isVisible());
+		sideNav.setVisible(!sideNav.isVisible());
+	}
+
+	@UiHandler("accountLink")
+	void handleUserNav(ClickEvent e) {
+		userNav.setVisible(!userNav.isVisible());
 	}
 }
