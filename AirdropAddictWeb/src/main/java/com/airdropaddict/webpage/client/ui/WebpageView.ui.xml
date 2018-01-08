@@ -67,41 +67,54 @@
 				addStyleNames="{style.customNav}" visible="false" backgroundColor="LIGHT_BLUE"
 				hideOn="HIDE_ON_LARGE">
 
-				<ma:tree.MaterialTree>
-					<ma:tree.MaterialTreeItem text="DalyAirdrops"
-						ui:field="airdropsItem" textColor="ORANGE_LIGHTEN_3" />
-					<ma:tree.MaterialTreeItem text="UntrustedAirdrops"
-						ui:field="untrustedItem" textColor="WHITE" />
-					<ma:tree.MaterialTreeItem text="Tutorial"
-						ui:field="tutorialItem" textColor="WHITE" />
-					<ma:tree.MaterialTreeItem iconType="ACCOUNT_CIRCLE"
-						text="Anonymous" textColor="WHITE">
-						<ma:tree.MaterialTreeItem text="Dashboard"
-							textColor="WHITE" />
-						<ma:tree.MaterialTreeItem text="SignUp"
-							textColor="WHITE" />
-						<ma:tree.MaterialTreeItem text="SignIn"
-							textColor="WHITE" />
-						<ma:tree.MaterialTreeItem text="LogOut"
-							textColor="WHITE" />
-					</ma:tree.MaterialTreeItem>
-				</ma:tree.MaterialTree>
+				<m:MaterialRow>
+					<m:MaterialLink iconType="ACCOUNT_CIRCLE" text="Anonymous"
+						textColor="WHITE" fontWeight="BOLD" iconColor="WHITE" grid="s12"
+						paddingTop="10" />
+
+					<m:MaterialLink text="DalyAirdrops" ui:field="airdropsItem"
+						textColor="ORANGE_LIGHTEN_3" fontWeight="BOLD" grid="s12"
+						paddingTop="10" />
+					<m:MaterialLink text="UntrustedAirdrops" ui:field="untrustedItem"
+						textColor="WHITE" fontWeight="BOLD" grid="s12" paddingTop="10" />
+					<m:MaterialLink text="Tutorial" ui:field="tutorialItem"
+						textColor="WHITE" fontWeight="BOLD" grid="s12" paddingTop="10" />
+
+					<m:MaterialLink text="SignUp" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
+					<m:MaterialLink text="SignIn" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
+					<m:MaterialLink text="LogOut" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
+
+					<m:MaterialLink text="Add Airdrop" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
+					<m:MaterialLink text="Add Untrusted" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
+				</m:MaterialRow>
 			</m:MaterialPanel>
 
 			<m:MaterialPanel ui:field="userNav" depth="1000"
 				addStyleNames="{style.customNav}" visible="false" backgroundColor="LIGHT_BLUE"
 				enabled="false" hideOn="HIDE_ON_MED_DOWN">
 
-				<ma:tree.MaterialTree>
-					<ma:tree.MaterialTreeItem text="Dashboard"
-						textColor="WHITE" />
-					<ma:tree.MaterialTreeItem text="SignUp"
-						textColor="WHITE" />
-					<ma:tree.MaterialTreeItem text="SignIn"
-						textColor="WHITE" />
-					<ma:tree.MaterialTreeItem text="LogOut"
-						textColor="WHITE" />
-				</ma:tree.MaterialTree>
+				<m:MaterialRow>
+					<m:MaterialLink iconType="ACCOUNT_CIRCLE" text="Anonymous"
+						textColor="WHITE" fontWeight="BOLD" iconColor="WHITE" grid="s12"
+						paddingTop="10" />
+
+					<m:MaterialLink text="SignUp" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
+					<m:MaterialLink text="SignIn" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
+					<m:MaterialLink text="LogOut" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
+
+					<m:MaterialLink text="Add Airdrop" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
+					<m:MaterialLink text="Add Untrusted" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
+				</m:MaterialRow>
 			</m:MaterialPanel>
 
 		</m:MaterialPanel>

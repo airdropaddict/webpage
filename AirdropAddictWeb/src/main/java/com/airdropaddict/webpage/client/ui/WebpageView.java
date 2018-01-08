@@ -10,7 +10,6 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.addins.client.tree.MaterialTreeItem;
 import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.ui.MaterialColumn;
 import gwt.material.design.client.ui.MaterialLink;
@@ -32,11 +31,11 @@ public class WebpageView extends Composite {
 	MaterialLink accountLink;
 
 	@UiField
-	MaterialTreeItem airdropsItem;
+	MaterialLink airdropsItem;
 	@UiField
-	MaterialTreeItem untrustedItem;
+	MaterialLink untrustedItem;
 	@UiField
-	MaterialTreeItem tutorialItem;
+	MaterialLink tutorialItem;
 
 	@UiField
 	MaterialLink sidenavActivator;
@@ -70,6 +69,7 @@ public class WebpageView extends Composite {
 			currentWidget.removeFromParent();
 			content.add(widget);
 			currentWidget = widget;
+			sideNav.setVisible(false);
 		}
 	}
 

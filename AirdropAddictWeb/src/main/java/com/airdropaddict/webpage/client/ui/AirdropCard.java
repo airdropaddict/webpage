@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.client.ui.MaterialCardTitle;
 import gwt.material.design.client.ui.MaterialLabel;
+import gwt.material.design.client.ui.MaterialLink;
 
 public class AirdropCard extends Composite {
 	private static AirdropInfoCardUiBinder uiBinder = GWT.create(AirdropInfoCardUiBinder.class);
@@ -23,6 +24,8 @@ public class AirdropCard extends Composite {
 	MaterialCardTitle title;
 	@UiField
 	MaterialLabel content;
+	@UiField
+	MaterialLink preview;
 
 	public AirdropCard(String title) {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -33,7 +36,7 @@ public class AirdropCard extends Composite {
 		title.setText(titlText);
 	}
 
-	@UiHandler("title")
+	@UiHandler({ "title", "preview" })
 	void handleClick(ClickEvent e) {
 		ClientEventBus.post(new ShowPreviewEvent(title.getText()));
 	}

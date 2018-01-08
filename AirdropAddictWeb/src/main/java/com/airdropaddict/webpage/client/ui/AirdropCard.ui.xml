@@ -15,7 +15,7 @@
 				<m:MaterialCardContent textColor="LIGHT_BLUE"
 					backgroundColor="WHITE" padding="5" border="5" paddingLeft="15">
 					<m:MaterialCardTitle ui:field="title"
-						addStyleNames="truncate" />
+						addStyleNames="truncate" iconType="DONE" iconPosition="RIGHT" />
 				</m:MaterialCardContent>
 				<m:MaterialDivider />
 				<m:MaterialCardContent backgroundColor="WHITE">
@@ -25,12 +25,12 @@
 				<m:MaterialCardAction padding="0">
 					<m:MaterialRow border="5" padding="5">
 						<m:MaterialColumn grid="s9" border="0">
-							<ma:rating.MaterialRating textColor="AMBER_LIGHTEN_1"
-								border="0" />
+							<m:MaterialLink textColor="LIGHT_BLUE" border="0"
+								iconType="POLL" iconPosition="LEFT" text="23" />
 						</m:MaterialColumn>
 						<m:MaterialColumn grid="s3" border="0" padding="5"
 							textAlign="RIGHT">
-							<m:MaterialLink textColor="BLUE" border="0" float="RIGHT"
+							<m:MaterialLink ui:field="preview" textColor="BLUE" border="0" float="RIGHT"
 								fontSize="1.4em" iconType="ADD_BOX" iconPosition="RIGHT" />
 						</m:MaterialColumn>
 					</m:MaterialRow>
