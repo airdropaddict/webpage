@@ -1,6 +1,7 @@
 package com.airdropaddict.webpage.client.ui;
 
 import com.airdropaddict.webpage.client.common.ClientEventBus;
+import com.airdropaddict.webpage.client.common.ShowAirdropsEvent;
 import com.airdropaddict.webpage.client.common.ShowPreviewEvent;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -52,6 +53,7 @@ public class WebpageView extends Composite {
 	UntrustedAirdropsContainer untrusted;
 	UntrustedAirdropsContainer tutorial;
 	AirdropPreview preview;
+	AddUntrustedContainer addUntrusted;
 
 	Widget currentWidget;
 
@@ -61,7 +63,9 @@ public class WebpageView extends Composite {
 		untrusted = new UntrustedAirdropsContainer();
 		tutorial = new UntrustedAirdropsContainer();
 		preview = new AirdropPreview();
+		addUntrusted = new AddUntrustedContainer();
 		ClientEventBus.register(ShowPreviewEvent.class, this::handleShowPreview);
+		ClientEventBus.register(ShowAirdropsEvent.class, this::handleShowAirdrops);
 	}
 
 	private void changeContent(Widget widget) {
@@ -69,8 +73,10 @@ public class WebpageView extends Composite {
 			currentWidget.removeFromParent();
 			content.add(widget);
 			currentWidget = widget;
-			sideNav.setVisible(false);
 		}
+
+		sideNav.setVisible(false);
+		userNav.setVisible(false);
 	}
 
 	@UiHandler({ "airdropsTab", "airdropsItem" })
@@ -112,9 +118,26 @@ public class WebpageView extends Composite {
 		changeContent(tutorial);
 	}
 
+	@UiHandler({ "addUntrustedLink", "addUntrustedSmallLink" })
+	void handleAddUntrusted(ClickEvent e) {
+		airdropsTab.setTextColor(Color.WHITE);
+		untrustedTab.setTextColor(Color.WHITE);
+		tutorialTab.setTextColor(Color.WHITE);
+
+		airdropsItem.setTextColor(Color.WHITE);
+		untrustedItem.setTextColor(Color.WHITE);
+		tutorialItem.setTextColor(Color.WHITE);
+
+		changeContent(addUntrusted);
+	}
+
 	void handleShowPreview(ShowPreviewEvent event) {
 		preview.present(event.title);
 		changeContent(preview);
+	}
+
+	void handleShowAirdrops(ShowAirdropsEvent event) {
+		handleAirdropsSelection(null);
 	}
 
 	@UiHandler("sidenavActivator")

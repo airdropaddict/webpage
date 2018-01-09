@@ -89,7 +89,7 @@
 
 					<m:MaterialLink text="Add Airdrop" textColor="WHITE"
 						fontWeight="BOLD" grid="s12" paddingTop="10" />
-					<m:MaterialLink text="Add Untrusted" textColor="WHITE"
+					<m:MaterialLink text="Add Untrusted" ui:field="addUntrustedLink" textColor="WHITE"
 						fontWeight="BOLD" grid="s12" paddingTop="10" />
 				</m:MaterialRow>
 			</m:MaterialPanel>
@@ -112,7 +112,7 @@
 
 					<m:MaterialLink text="Add Airdrop" textColor="WHITE"
 						fontWeight="BOLD" grid="s12" paddingTop="10" />
-					<m:MaterialLink text="Add Untrusted" textColor="WHITE"
+					<m:MaterialLink text="Add Untrusted" ui:field="addUntrustedSmallLink" textColor="WHITE"
 						fontWeight="BOLD" grid="s12" paddingTop="10" />
 				</m:MaterialRow>
 			</m:MaterialPanel>

@@ -1,0 +1,25 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:m="urn:import:gwt.material.design.client.ui">
+	<g:HTMLPanel>
+		<m:MaterialCard>
+			<m:MaterialCardContent textColor="LIGHT_BLUE"
+				backgroundColor="WHITE" padding="5" border="5" paddingLeft="15">
+				<m:MaterialCardTitle text="Add untrusted airdrop" />
+			</m:MaterialCardContent>
+			<m:MaterialDivider />
+			<m:MaterialCardContent backgroundColor="WHITE">
+				<m:MaterialTextBox label="Name" ui:field="nameTextField" />
+				<m:MaterialTextBox label="URL" ui:field="urlTextField" />
+				<m:MaterialTextArea label="Description" ui:field="descriptionTextArea" />
+			</m:MaterialCardContent>
+			<m:MaterialCardAction padding="0">
+				<m:MaterialButton backgroundColor="LIGHT_BLUE"
+					textColor="WHITE" text="Cancle" float="RIGHT" ui:field="cancleButton"
+					marginLeft="10" />
+				<m:MaterialButton backgroundColor="LIGHT_BLUE"
+					textColor="WHITE" text="Confirm" float="RIGHT" ui:field="confirmButton" />
+			</m:MaterialCardAction>
+		</m:MaterialCard>
+	</g:HTMLPanel>
+</ui:UiBinder> 
