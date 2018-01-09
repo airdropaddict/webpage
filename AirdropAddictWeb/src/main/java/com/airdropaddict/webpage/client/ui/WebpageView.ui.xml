@@ -80,17 +80,21 @@
 					<m:MaterialLink text="Tutorial" ui:field="tutorialItem"
 						textColor="WHITE" fontWeight="BOLD" grid="s12" paddingTop="10" />
 
+					<m:MaterialLink text="Profile" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
 					<m:MaterialLink text="SignUp" textColor="WHITE"
 						fontWeight="BOLD" grid="s12" paddingTop="10" />
 					<m:MaterialLink text="SignIn" textColor="WHITE"
 						fontWeight="BOLD" grid="s12" paddingTop="10" />
+					<m:MaterialLink text="ForgottenPassword" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
 					<m:MaterialLink text="LogOut" textColor="WHITE"
 						fontWeight="BOLD" grid="s12" paddingTop="10" />
 
-					<m:MaterialLink text="Add Airdrop" textColor="WHITE"
-						fontWeight="BOLD" grid="s12" paddingTop="10" />
-					<m:MaterialLink text="Add Untrusted" ui:field="addUntrustedLink" textColor="WHITE"
-						fontWeight="BOLD" grid="s12" paddingTop="10" />
+					<m:MaterialLink text="Add Airdrop" ui:field="addAirdropLink"
+						textColor="WHITE" fontWeight="BOLD" grid="s12" paddingTop="10" />
+					<m:MaterialLink text="Add Untrusted" ui:field="addUntrustedLink"
+						textColor="WHITE" fontWeight="BOLD" grid="s12" paddingTop="10" />
 				</m:MaterialRow>
 			</m:MaterialPanel>
 
@@ -103,17 +107,21 @@
 						textColor="WHITE" fontWeight="BOLD" iconColor="WHITE" grid="s12"
 						paddingTop="10" />
 
+					<m:MaterialLink text="Profile" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
 					<m:MaterialLink text="SignUp" textColor="WHITE"
 						fontWeight="BOLD" grid="s12" paddingTop="10" />
 					<m:MaterialLink text="SignIn" textColor="WHITE"
 						fontWeight="BOLD" grid="s12" paddingTop="10" />
+					<m:MaterialLink text="ForgottenPassword" textColor="WHITE"
+						fontWeight="BOLD" grid="s12" paddingTop="10" />
 					<m:MaterialLink text="LogOut" textColor="WHITE"
 						fontWeight="BOLD" grid="s12" paddingTop="10" />
 
-					<m:MaterialLink text="Add Airdrop" textColor="WHITE"
-						fontWeight="BOLD" grid="s12" paddingTop="10" />
-					<m:MaterialLink text="Add Untrusted" ui:field="addUntrustedSmallLink" textColor="WHITE"
-						fontWeight="BOLD" grid="s12" paddingTop="10" />
+					<m:MaterialLink text="Add Airdrop" ui:field="addAirdropSmallLink"
+						textColor="WHITE" fontWeight="BOLD" grid="s12" paddingTop="10" />
+					<m:MaterialLink text="Add Untrusted" ui:field="addUntrustedSmallLink"
+						textColor="WHITE" fontWeight="BOLD" grid="s12" paddingTop="10" />
 				</m:MaterialRow>
 			</m:MaterialPanel>
 
